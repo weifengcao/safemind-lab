@@ -1,0 +1,2 @@
+# Redirect non-www to www (if preferred)
+# https://safemindlab.com/* https://www.safemindlab.com/:splat 301
