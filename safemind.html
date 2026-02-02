@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="SafeMind Lab - The Safety, Trust, and Certification Layer for Embodied Autonomy. Building the future of autonomous safety.">
+        content="SafeMind Lab - Pre-execution governance for agentic and autonomous workflows. Control what autonomous systems are allowed to do—before they do it.">
     <meta name="keywords" content="autonomous safety, robot certification, physical AI, embodied autonomy">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
@@ -291,17 +291,18 @@
                     <span class="mono text-sm font-bold text-[var(--accent)]">COMING SOON</span>
                 </div>
 
-                <h1 class="text-5xl md:text-6xl lg:text-6xl font-extrabold mono leading-[0.9] mb-8">
-                    SAFE AND SECURE <br />
-                    <span class="text-white/40">PHYSICAL</span><br />
-                    <span class="text-[var(--accent)]">INTELLIGENCE</span>
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold mono leading-tight mb-8">
+                    CONTROL WHAT <br />
+                    <span class="text-white/40">AUTONOMOUS SYSTEMS</span><br />
+                    <span class="text-[var(--accent)]">ARE ALLOWED TO DO</span>
                 </h1>
                 <p class="text-xl md:text-2xl text-white/80 mb-4 leading-relaxed max-w-2xl">
-                    The Safety, Trust, and Certification Layer for Embodied Autonomy
+                    Before they do it.
                 </p>
                 <p class="text-base md:text-lg text-white/60 mb-12 leading-relaxed max-w-2xl">
-                    Building the independent global authority for autonomous safety — the <span
-                        class="text-[var(--accent)]">Moody's of Robotic Risk.</span>
+                    Pre-execution governance for agentic and autonomous workflows: <span
+                        class="text-[var(--accent)]">enforce policies, require approval for high-risk actions, and
+                        generate audit-ready evidence.</span>
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4">
@@ -319,65 +320,113 @@
 
             <!-- "Nano" Scanning Animation Container -->
             <div class="animation-container glass-card rounded-3xl hidden lg:block mt-8 overflow-hidden relative group"
-                aria-hidden="true" style="background: rgba(0,0,0,0.4);">
+                aria-hidden="true"
+                style="background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(20,10,30,0.4) 100%);">
+
+                <!-- Animated Background Gradient -->
+                <div class="absolute inset-0"
+                    style="background: radial-gradient(ellipse at 30% 20%, rgba(255,77,0,0.08) 0%, transparent 50%);">
+                </div>
+                <div class="absolute inset-0"
+                    style="background: radial-gradient(ellipse at 70% 80%, rgba(100,50,255,0.05) 0%, transparent 50%);">
+                </div>
 
                 <!-- Background Grid -->
                 <div class="absolute inset-0"
-                    style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0); background-size: 20px 20px;">
+                    style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0); background-size: 30px 30px;">
                 </div>
 
-                <!-- Scanning Laser -->
-                <div class="scan-line"></div>
+                <!-- Floating Particles -->
+                <div class="particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+                <div class="particle" style="left: 25%; top: 60%; animation-delay: 1s;"></div>
+                <div class="particle" style="left: 45%; top: 30%; animation-delay: 2s;"></div>
+                <div class="particle" style="left: 65%; top: 70%; animation-delay: 0.5s;"></div>
+                <div class="particle" style="left: 80%; top: 40%; animation-delay: 1.5s;"></div>
+                <div class="particle" style="left: 90%; top: 15%; animation-delay: 2.5s;"></div>
+                <div class="particle" style="left: 15%; top: 80%; animation-delay: 3s;"></div>
+                <div class="particle" style="left: 55%; top: 85%; animation-delay: 0.8s;"></div>
 
-                <!-- Scanning Laser Container -->
+                <!-- Connection Lines SVG -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none" style="opacity: 0.4;">
+                    <defs>
+                        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:rgba(255,77,0,0);" />
+                            <stop offset="50%" style="stop-color:rgba(255,77,0,0.6);" />
+                            <stop offset="100%" style="stop-color:rgba(255,77,0,0);" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Animated connection paths -->
+                    <path class="connection-line" d="M 80 120 Q 200 80 280 150" stroke="url(#lineGradient)"
+                        stroke-width="1" fill="none" />
+                    <path class="connection-line" d="M 300 100 Q 350 200 420 140" stroke="url(#lineGradient)"
+                        stroke-width="1" fill="none" style="animation-delay: 1s;" />
+                    <path class="connection-line" d="M 100 280 Q 200 250 280 300" stroke="url(#lineGradient)"
+                        stroke-width="1" fill="none" style="animation-delay: 2s;" />
+                </svg>
+
+                <!-- Scanning Laser Container with Shield -->
                 <div class="scan-line-container">
-                    <div class="scan-line"></div>
-                    <div class="scan-shield-sticker"></div>
+                    <div class="scan-line-enhanced"></div>
+                    <!-- SafeMind Shield - Center of the scanner -->
+                    <div class="scanner-shield">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="shield-label">SAFEMIND</span>
+                    </div>
+                    <div class="scan-glow"></div>
                 </div>
 
-                <!-- Assets Container -->
+                <!-- Animation Styles -->
                 <style>
-                    .nano-asset {
+                    /* Floating Particles */
+                    .particle {
                         position: absolute;
-                        width: 120px;
-                        height: 120px;
-                        background-image: url('file:///Users/weifengcao/.gemini/antigravity/brain/c46e528c-8497-405d-9cab-43ade49ba6b0/safemind_assets_1769554927292.png');
-                        background-size: 200%;
-                        /* No shadows as requested */
-                        transition: opacity 0.5s ease;
+                        width: 4px;
+                        height: 4px;
+                        background: var(--accent);
+                        border-radius: 50%;
+                        opacity: 0.6;
+                        animation: float-particle 6s ease-in-out infinite;
                     }
 
-                    /* Sprite Mapping */
-                    .asset-robot {
-                        background-position: 5% 5%;
+                    @keyframes float-particle {
+
+                        0%,
+                        100% {
+                            transform: translateY(0) scale(1);
+                            opacity: 0.3;
+                        }
+
+                        50% {
+                            transform: translateY(-20px) scale(1.5);
+                            opacity: 0.8;
+                        }
                     }
 
-                    .asset-rover {
-                        background-position: 95% 5%;
+                    /* Connection Lines */
+                    .connection-line {
+                        stroke-dasharray: 200;
+                        stroke-dashoffset: 200;
+                        animation: draw-line 4s ease-in-out infinite;
                     }
 
-                    .asset-car {
-                        background-position: 5% 95%;
+                    @keyframes draw-line {
+                        0% {
+                            stroke-dashoffset: 200;
+                            opacity: 0;
+                        }
+
+                        50% {
+                            stroke-dashoffset: 0;
+                            opacity: 1;
+                        }
+
+                        100% {
+                            stroke-dashoffset: -200;
+                            opacity: 0;
+                        }
                     }
 
-                    /* Sticker Specific Style */
-                    .scan-shield-sticker {
-                        position: absolute;
-                        left: 50%;
-                        top: -20px;
-                        /* Centered on the line */
-                        transform: translateX(-50%);
-                        width: 40px;
-                        height: 40px;
-                        background-image: url('file:///Users/weifengcao/.gemini/antigravity/brain/c46e528c-8497-405d-9cab-43ade49ba6b0/safemind_assets_1769554927292.png');
-                        background-size: 200%;
-                        background-position: 95% 95%;
-                        /* Shield Sprite */
-                        z-index: 20;
-                        /* Only the shield glows */
-                    }
-
-                    /* Scan Animation Wrapper */
+                    /* Enhanced Scan Line */
                     .scan-line-container {
                         position: absolute;
                         top: 0;
@@ -385,20 +434,72 @@
                         width: 100%;
                         height: 100%;
                         pointer-events: none;
-                        animation: laser-scan-movement 4s ease-in-out infinite;
-                        z-index: 10;
+                        animation: laser-scan-movement 5s ease-in-out infinite;
+                        z-index: 15;
                     }
 
-                    .scan-line {
+                    .scan-line-enhanced {
                         width: 100%;
-                        height: 2px;
-                        background: var(--accent);
-                        box-shadow: 0 0 20px var(--accent);
+                        height: 3px;
+                        background: linear-gradient(90deg, transparent 0%, var(--accent) 20%, var(--accent) 80%, transparent 100%);
+                        box-shadow: 0 0 30px var(--accent), 0 0 60px var(--accent);
+                    }
+
+                    /* Scanner Shield (SafeMind Product) */
+                    .scanner-shield {
+                        position: absolute;
+                        left: 50%;
+                        top: -25px;
+                        transform: translateX(-50%);
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 4px;
+                        z-index: 25;
+                    }
+
+                    .scanner-shield i {
+                        font-size: 2.5rem;
+                        color: var(--accent);
+                        filter: drop-shadow(0 0 20px var(--accent)) drop-shadow(0 0 40px var(--accent));
+                        animation: shield-pulse 1.5s ease-in-out infinite;
+                    }
+
+                    .scanner-shield .shield-label {
+                        font-family: 'JetBrains Mono', monospace;
+                        font-size: 9px;
+                        font-weight: 700;
+                        letter-spacing: 0.15em;
+                        color: var(--accent);
+                        text-shadow: 0 0 10px var(--accent);
+                        background: rgba(0, 0, 0, 0.6);
+                        padding: 2px 8px;
+                        border-radius: 4px;
+                        border: 1px solid rgba(255, 77, 0, 0.3);
+                    }
+
+                    @keyframes shield-pulse {
+
+                        0%,
+                        100% {
+                            transform: scale(1);
+                        }
+
+                        50% {
+                            transform: scale(1.1);
+                        }
+                    }
+
+                    .scan-glow {
+                        width: 100%;
+                        height: 80px;
+                        margin-top: -40px;
+                        background: linear-gradient(180deg, rgba(255, 77, 0, 0.15) 0%, transparent 100%);
                     }
 
                     @keyframes laser-scan-movement {
                         0% {
-                            transform: translateY(-10%);
+                            transform: translateY(-5%);
                             opacity: 0;
                         }
 
@@ -411,121 +512,290 @@
                         }
 
                         100% {
-                            transform: translateY(110%);
+                            transform: translateY(105%);
                             opacity: 0;
                         }
                     }
 
-                    /* Dynamic Movement Animations */
-                    @keyframes path-humanoid {
-                        0% {
-                            top: 15%;
-                            left: 15%;
+                    /* Glassmorphism Agentic Icons */
+                    .agentic-icon-v2 {
+                        position: absolute;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 65px;
+                        height: 65px;
+                        border-radius: 16px;
+                        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+                        backdrop-filter: blur(10px);
+                        border: 1px solid rgba(255, 255, 255, 0.15);
+                        color: #fff;
+                        font-size: 1.4rem;
+                        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
+
+                    .agentic-icon-v2::before {
+                        content: '';
+                        position: absolute;
+                        inset: -2px;
+                        border-radius: 18px;
+                        background: linear-gradient(135deg, rgba(255, 77, 0, 0.5), transparent, rgba(255, 77, 0, 0.3));
+                        z-index: -1;
+                        opacity: 0;
+                        transition: opacity 0.4s ease;
+                    }
+
+                    .agentic-icon-v2:hover::before {
+                        opacity: 1;
+                    }
+
+                    .agentic-icon-v2 i {
+                        filter: drop-shadow(0 0 10px currentColor);
+                    }
+
+                    .agentic-icon-v2 .status-dot {
+                        position: absolute;
+                        top: -3px;
+                        right: -3px;
+                        width: 10px;
+                        height: 10px;
+                        background: #22c55e;
+                        border-radius: 50%;
+                        border: 2px solid rgba(0, 0, 0, 0.5);
+                        animation: pulse-status 2s ease-in-out infinite;
+                    }
+
+                    @keyframes pulse-status {
+
+                        0%,
+                        100% {
                             transform: scale(1);
+                            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
                         }
 
                         50% {
-                            top: 20%;
-                            left: 15%;
-                            transform: scale(1.05);
-                        }
-
-                        100% {
-                            top: 15%;
-                            left: 15%;
-                            transform: scale(1);
+                            transform: scale(1.1);
+                            box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
                         }
                     }
 
-                    @keyframes path-delivery {
+                    /* Physical Asset Wrapper */
+                    .physical-asset-wrapper {
+                        position: absolute;
+                        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+                    }
+
+                    .nano-asset {
+                        width: 100%;
+                        height: 100%;
+                        background-image: url('file:///Users/weifengcao/.gemini/antigravity/brain/c46e528c-8497-405d-9cab-43ade49ba6b0/safemind_assets_1769554927292.png');
+                        background-size: 200%;
+                        transition: all 0.5s ease;
+                    }
+
+                    .asset-robot {
+                        background-position: 5% 5%;
+                    }
+
+                    .asset-car {
+                        background-position: 5% 95%;
+                    }
+
+                    /* Movement Animations */
+                    @keyframes float-robot {
+
+                        0%,
+                        100% {
+                            top: 12%;
+                            left: 8%;
+                            transform: translateY(0) rotate(-2deg);
+                        }
+
+                        50% {
+                            top: 18%;
+                            left: 10%;
+                            transform: translateY(-10px) rotate(2deg);
+                        }
+                    }
+
+                    @keyframes drive-vehicle {
                         0% {
+                            bottom: 8%;
+                            left: -25%;
+                            opacity: 0;
+                        }
+
+                        10% {
+                            opacity: 1;
+                        }
+
+                        50% {
+                            bottom: 12%;
+                        }
+
+                        90% {
+                            opacity: 1;
+                        }
+
+                        100% {
+                            bottom: 8%;
+                            left: 110%;
+                            opacity: 0;
+                        }
+                    }
+
+                    @keyframes float-brain {
+
+                        0%,
+                        100% {
                             top: 10%;
-                            right: 10%;
-                            transform: translateX(0);
+                            right: 12%;
+                            transform: scale(1) rotate(0deg);
                         }
 
                         50% {
                             top: 15%;
-                            right: 20%;
-                            transform: translateX(-20px);
-                        }
-
-                        100% {
-                            top: 10%;
-                            right: 10%;
-                            transform: translateX(0);
+                            right: 16%;
+                            transform: scale(1.08) rotate(5deg);
                         }
                     }
 
-                    @keyframes path-industrial {
-                        0% {
-                            bottom: 25%;
-                            right: 15%;
-                            transform: rotate(0deg);
+                    @keyframes float-code {
+
+                        0%,
+                        100% {
+                            top: 48%;
+                            left: 6%;
+                            transform: translateY(0);
                         }
 
                         50% {
+                            top: 52%;
+                            left: 8%;
+                            transform: translateY(-8px);
+                        }
+                    }
+
+                    @keyframes float-api {
+
+                        0%,
+                        100% {
                             bottom: 30%;
-                            right: 15%;
-                            transform: rotate(5deg);
-                        }
-
-                        100% {
-                            bottom: 25%;
-                            right: 15%;
-                            transform: rotate(0deg);
-                        }
-                    }
-
-                    @keyframes path-av {
-                        0% {
-                            bottom: 10%;
-                            left: -20%;
-                            opacity: 0;
-                        }
-
-                        15% {
-                            opacity: 1;
+                            right: 6%;
+                            transform: scale(1);
                         }
 
                         50% {
-                            bottom: 15%;
-                            left: 40%;
+                            bottom: 35%;
+                            right: 10%;
+                            transform: scale(1.1);
+                        }
+                    }
+
+                    @keyframes float-workflow {
+
+                        0%,
+                        100% {
+                            top: 38%;
+                            right: 32%;
+                            transform: rotate(0deg);
                         }
 
-                        85% {
-                            opacity: 1;
+                        50% {
+                            top: 42%;
+                            right: 36%;
+                            transform: rotate(90deg);
+                        }
+                    }
+
+                    @keyframes float-shield {
+
+                        0%,
+                        100% {
+                            bottom: 15%;
+                            left: 35%;
+                            transform: scale(1);
+                        }
+
+                        50% {
+                            bottom: 20%;
+                            left: 38%;
+                            transform: scale(1.1);
+                        }
+                    }
+
+                    /* Data Stream Effect */
+                    .data-stream {
+                        position: absolute;
+                        font-family: 'JetBrains Mono', monospace;
+                        font-size: 10px;
+                        color: rgba(255, 77, 0, 0.4);
+                        white-space: nowrap;
+                        animation: scroll-data 8s linear infinite;
+                        opacity: 0.5;
+                    }
+
+                    @keyframes scroll-data {
+                        0% {
+                            transform: translateX(100%);
                         }
 
                         100% {
-                            bottom: 10%;
-                            left: 120%;
-                            opacity: 0;
+                            transform: translateX(-100%);
                         }
                     }
                 </style>
 
-                <!-- Humanoid Robot -->
-                <div class="nano-asset asset-robot" style="animation: path-humanoid 6s ease-in-out infinite;"></div>
+                <!-- Data Streams -->
+                <div class="data-stream" style="top: 25%; left: 0;">POLICY_CHECK::ALLOW → VERIFY_ACTION → LOG_AUDIT
+                </div>
+                <div class="data-stream" style="top: 65%; left: 0; animation-delay: -4s;">PRE_EXEC_GATE::APPROVE →
+                    ENFORCE_LIMIT → EVIDENCE_TRAIL</div>
 
-                <!-- Delivery Robot -->
-                <div class="nano-asset asset-rover"
-                    style="width: 100px; height: 100px; animation: path-delivery 7s ease-in-out infinite;"></div>
-
-                <!-- Industrial Robot (represented by Rover sprite with rotation) -->
-                <div class="nano-asset asset-rover"
-                    style="width: 110px; height: 110px; filter: hue-rotate(45deg); animation: path-industrial 9s ease-in-out infinite;">
+                <!-- Physical Assets -->
+                <div class="physical-asset-wrapper"
+                    style="width: 85px; height: 85px; animation: float-robot 7s ease-in-out infinite;">
+                    <div class="nano-asset asset-robot"></div>
                 </div>
 
-                <!-- Autonomous Vehicle -->
-                <div class="nano-asset asset-car"
-                    style="width: 140px; height: 140px; animation: path-av 8s linear infinite;"></div>
+                <div class="physical-asset-wrapper"
+                    style="width: 110px; height: 110px; animation: drive-vehicle 10s linear infinite;">
+                    <div class="nano-asset asset-car"></div>
+                </div>
 
-                <!-- Corner HUD Elements -->
-                <div class="absolute top-4 left-4 w-4 h-4 border-l-2 border-t-2 border-white/20"></div>
-                <div class="absolute top-4 right-4 w-4 h-4 border-r-2 border-t-2 border-white/20"></div>
-                <div class="absolute bottom-4 left-4 w-4 h-4 border-l-2 border-b-2 border-white/20"></div>
-                <div class="absolute bottom-4 right-4 w-4 h-4 border-r-2 border-b-2 border-white/20"></div>
+                <!-- Agentic System Icons with Status -->
+                <div class="agentic-icon-v2" style="animation: float-brain 6s ease-in-out infinite; color: #60a5fa;">
+                    <i class="fas fa-brain"></i>
+                    <span class="status-dot"></span>
+                </div>
+
+                <div class="agentic-icon-v2" style="animation: float-code 7s ease-in-out infinite; color: #a78bfa;">
+                    <i class="fas fa-code"></i>
+                    <span class="status-dot"></span>
+                </div>
+
+                <div class="agentic-icon-v2" style="animation: float-api 8s ease-in-out infinite; color: #34d399;">
+                    <i class="fas fa-plug"></i>
+                    <span class="status-dot"></span>
+                </div>
+
+                <div class="agentic-icon-v2"
+                    style="width: 55px; height: 55px; font-size: 1.1rem; animation: float-workflow 9s linear infinite; color: #fbbf24;">
+                    <i class="fas fa-cogs"></i>
+                    <span class="status-dot"></span>
+                </div>
+
+                <!-- Corner HUD Elements (Enhanced) -->
+                <div class="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-[var(--accent)]/40"></div>
+                <div class="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-[var(--accent)]/40"></div>
+                <div class="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-[var(--accent)]/40"></div>
+                <div class="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-[var(--accent)]/40"></div>
+
+                <!-- Status Text -->
+                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs font-mono text-white/30 tracking-wider">
+                    GOVERNANCE ACTIVE
+                </div>
             </div>
         </div>
     </header>
@@ -538,57 +808,56 @@
         </div>
 
         <div class="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
-            <div class="section-label mb-6 mono text-center">The Challenge</div>
+            <div class="section-label mb-6 mono text-center">What We Enable</div>
             <h2 class="text-3xl md:text-5xl font-bold mb-4 mono text-center">
-                The <span class="text-[var(--accent)]">Safety Horizon</span>
+                <span class="text-[var(--accent)]">Pre-Execution</span> Governance
             </h2>
             <p class="text-white/60 text-center max-w-2xl mx-auto mb-16 leading-relaxed">
-                As embodied intelligence enters the physical world, traditional safety frameworks struggle to keep pace
-                with the scale of deployment.
+                Stop risky actions before they happen. SafeMind Lab provides the governance layer that sits between
+                intent and execution in agentic workflows.
             </p>
 
-
-
             <div class="grid md:grid-cols-3 gap-8 items-stretch">
-                <!-- 1. Complexity -->
+                <!-- 1. Pre-Execution Gating -->
                 <div
                     class="glass-card p-8 rounded-2xl border border-white/10 hover:border-white/20 transition duration-300">
-                    <div class="text-3xl mb-4">📈</div>
-                    <h3 class="text-xl font-bold mb-3">Infinite Complexity</h3>
+                    <div class="text-3xl mb-4">�</div>
+                    <h3 class="text-xl font-bold mb-3">Pre-Execution Gating</h3>
                     <p class="text-white/50 text-sm leading-relaxed mb-4">
-                        Modern robotic systems encounter infinite edge cases in unstructured environments, far beyond
-                        rule-based logic.
+                        Every action passes through policy checks. Allow, deny, or require human approval—before
+                        anything executes.
                     </p>
-                    <div class="text-[var(--accent)] text-sm font-bold mono">Beyond Rules</div>
+                    <div class="text-[var(--accent)] text-sm font-bold mono">Allow / Deny / Approve</div>
                 </div>
 
-                <!-- 2. Ubiquity -->
+                <!-- 2. Explicit Policies -->
                 <div class="glass-card p-8 rounded-2xl border border-[var(--accent)]/30 bg-[var(--accent)]/5 relative">
-                    <div class="text-3xl mb-4">🌍</div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Global Scale</h3>
+                    <div class="text-3xl mb-4">📜</div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Explicit Policies</h3>
                     <p class="text-white/60 text-sm leading-relaxed mb-4">
-                        From sidewalks to factory floors, autonomy is scaling faster than our ability to manually
-                        supervise it.
+                        Define clear boundaries: spending limits, data access controls, API rate caps, and high-risk
+                        action guardrails.
                     </p>
-                    <div class="text-white/90 text-sm font-bold mono">Unsupervised Scale</div>
+                    <div class="text-white/90 text-sm font-bold mono">Enforce Limits</div>
                 </div>
 
-                <!-- 3. Trust -->
+                <!-- 3. Evidence-First -->
                 <div
                     class="glass-card p-8 rounded-2xl border border-white/10 hover:border-white/20 transition duration-300">
-                    <div class="text-3xl mb-4">🤝</div>
-                    <h3 class="text-xl font-bold mb-3">The Trust Deficit</h3>
+                    <div class="text-3xl mb-4">📋</div>
+                    <h3 class="text-xl font-bold mb-3">Evidence-First Auditing</h3>
                     <p class="text-white/50 text-sm leading-relaxed mb-4">
-                        Widespread adoption requires mathematical certainty that systems will behave safely, every time.
+                        Every decision logged. Append-only audit trails tied to policy versions. Audit-ready from
+                        day one.
                     </p>
-                    <div class="text-[var(--accent)] text-sm font-bold mono">Verifiable Safety</div>
+                    <div class="text-[var(--accent)] text-sm font-bold mono">Immutable Trails</div>
                 </div>
             </div>
 
             <div class="mt-16 text-center">
                 <p class="text-lg text-white/80 max-w-3xl mx-auto">
-                    SafeMind Lab is building the <span class="text-[var(--accent)] font-bold">Foundation for
-                        Trust</span> in the age of physical intelligence.
+                    SafeMind Lab is building the <span class="text-[var(--accent)] font-bold">Control Plane for
+                        Autonomous Systems</span> — governance that happens before execution, not after.
                 </p>
             </div>
         </div>
@@ -599,7 +868,7 @@
         <div class="max-w-7xl mx-auto px-6 md:px-8">
             <div class="section-label mb-6 mono text-center">Our Mission</div>
             <h2 class="text-4xl md:text-6xl font-bold mb-12 mono text-center max-w-4xl mx-auto">
-                Enable Safe, Trustworthy, and Certifiable <span class="text-[var(--accent)]">Physical AI</span>
+                Govern Agentic Systems <span class="text-[var(--accent)]">Before They Act</span>
             </h2>
 
             <div class="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
@@ -607,8 +876,8 @@
                     <div class="text-4xl mb-4">🎯</div>
                     <h3 class="mono text-2xl mb-4 font-bold">Mission</h3>
                     <p class="text-white/60 leading-relaxed">
-                        To enable safe, trustworthy, and certifiable Physical AI for all embodied systems — humanoids,
-                        autonomous vehicles, delivery robots, and agentic robotic platforms.
+                        To provide pre-execution governance for agentic and autonomous workflows — enforcing policies,
+                        requiring approval for high-risk actions, and generating audit-ready evidence.
                     </p>
                 </div>
 
@@ -616,24 +885,24 @@
                     <div class="text-4xl mb-4">🌍</div>
                     <h3 class="mono text-2xl mb-4 font-bold">Vision</h3>
                     <p class="text-white/60 leading-relaxed">
-                        SafeMind Lab becomes the independent global authority for autonomous safety, similar to how UL
-                        certifies electronics and Moody's rates financial risk.
+                        Every AI agent, robotic system, and autonomous workflow operates within explicit, verifiable
+                        boundaries — with complete accountability for every action taken.
                     </p>
                 </div>
             </div>
 
             <div class="glass-card p-8 md:p-12 rounded-2xl text-center max-w-4xl mx-auto mt-12 accent-glow">
                 <p class="text-2xl md:text-3xl font-bold text-white/90 mono leading-relaxed">
-                    No autonomous robot or vehicle should move in the real world without SafeMind Certification.
+                    No autonomous system should act in the real world without SafeMind governance.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Market Segments -->
+    <!-- Use Cases -->
     <section class="py-24 md:py-40 bg-black/30 border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6 md:px-8">
-            <div class="section-label mb-6 mono text-center">Target Markets</div>
+            <div class="section-label mb-6 mono text-center">Use Cases</div>
             <h2 class="text-4xl md:text-6xl font-bold mb-16 mono text-center">
                 Who Needs <span class="text-[var(--accent)]">SafeMind</span>
             </h2>
@@ -641,23 +910,23 @@
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="glass-card p-6 rounded-xl text-center">
                     <div class="text-4xl mb-4">🤖</div>
-                    <h4 class="mono font-bold mb-2">Humanoid Robots</h4>
-                    <p class="text-sm text-white/50">Pilot safety audits & insurance clearance</p>
+                    <h4 class="mono font-bold mb-2">AI Agents</h4>
+                    <p class="text-sm text-white/50">Policy gates for autonomous code execution & API calls</p>
                 </div>
                 <div class="glass-card p-6 rounded-xl text-center">
-                    <div class="text-4xl mb-4">📦</div>
-                    <h4 class="mono font-bold mb-2">Delivery Robots</h4>
-                    <p class="text-sm text-white/50">Sidewalk permits & city compliance</p>
+                    <div class="text-4xl mb-4">�</div>
+                    <h4 class="mono font-bold mb-2">Agentic Workflows</h4>
+                    <p class="text-sm text-white/50">Spending limits, approval chains & action boundaries</p>
                 </div>
                 <div class="glass-card p-6 rounded-xl text-center">
                     <div class="text-4xl mb-4">🚗</div>
-                    <h4 class="mono font-bold mb-2">Autonomous Vehicles</h4>
-                    <p class="text-sm text-white/50">AV STEP compliance & deployment</p>
+                    <h4 class="mono font-bold mb-2">Physical Autonomy</h4>
+                    <p class="text-sm text-white/50">Real-world action governance for robots & vehicles</p>
                 </div>
                 <div class="glass-card p-6 rounded-xl text-center">
-                    <div class="text-4xl mb-4">🏭</div>
-                    <h4 class="mono font-bold mb-2">Industrial Robots</h4>
-                    <p class="text-sm text-white/50">ISO 10218-1 certification</p>
+                    <div class="text-4xl mb-4">�</div>
+                    <h4 class="mono font-bold mb-2">Enterprise AI</h4>
+                    <p class="text-sm text-white/50">Compliance-ready audit trails for regulated industries</p>
                 </div>
             </div>
         </div>
