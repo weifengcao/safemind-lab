@@ -1,9 +1,20 @@
 # Strategic Risk Register
-Status: Living Document
+Status: Living
 
-## Key Risks
-- Latency vs safety tradeoffs
-- Behavioral false positives
-- Hardware enclave compromise
+## Technical
+- Latency exceeding safety thresholds
+- ZK prover performance limits
 
-Each risk must have an explicit mitigation owner.
+## Product
+- Over-scoping too early
+- False positive enforcement
+
+## Market
+- Buyers not yet educated
+- Budget ownership ambiguity
+
+## Regulatory
+- Shifting compliance requirements
+
+## Mitigation
+Each risk must have an owner and review cadence.
