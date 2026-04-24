@@ -1,7 +1,5 @@
 {
   "name": "safemind-lab",
   "compatibility_date": "2026-02-02",
-  "assets": {
-    "directory": "./dist"
-  }
+  "pages_build_output_dir": "./dist"
 }
