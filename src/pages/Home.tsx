@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { ChevronRight, Shield, Cpu, GitBranch, ArrowUpRight, Github, BarChart3, Workflow } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import { projectSummaries } from '../content/projects';
 
 export default function Home() {
   const containerVariants = {
@@ -40,7 +41,7 @@ export default function Home() {
               Building governed <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">enterprise AI systems</span>
             </h1>
             <p className="text-xl text-slate-500 max-w-4xl mb-8 leading-relaxed font-light">
-              SafeMind Lab explores how enterprise AI systems are designed, evaluated, and evolved under real-world constraints. We study hybrid SaaS–AaaS architectures and build systems to measure, govern, and adapt them through feedback, evaluation, and human-in-the-loop review.
+              SafeMind Lab explores how enterprise AI systems are designed, evaluated, and evolved under real-world constraints. The lab studies hybrid SaaS–AaaS architectures and builds systems to measure, govern, and adapt them through feedback, evaluation, and human-in-the-loop review.
             </p>
             <p className="text-base md:text-lg text-slate-600 max-w-3xl mb-12 leading-relaxed">
               The work is grounded in concrete engineering: agent harnesses, control planes, evaluation pipelines, and domain workloads such as SOC investigation and compliance review.
@@ -171,18 +172,15 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <ProjectCard
-              title="SOC Triage Agent"
-              desc="An investigation workload for alert normalization, evidence gathering, risk scoring, and structured triage verdicts under security constraints."
-              tags={['Cybersecurity', 'Harness Workload']}
-              link="/projects/soc-agent"
-            />
-            <ProjectCard
-              title="Fintech Compliance Agent"
-              desc="A policy-heavy workload for testing auditability, evidence provenance, policy mapping, and human review in regulated workflows."
-              tags={['Compliance', 'Policy Engine']}
-              link="/projects/fintech-compliance"
-            />
+            {projectSummaries.map((project) => (
+              <ProjectCard
+                key={project.id}
+                title={project.title}
+                desc={project.desc}
+                tags={project.tags}
+                link={project.link}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -192,7 +190,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl font-bold mb-6 text-slate-900 tracking-tight">Reconfigurable Enterprise AI</h2>
           <p className="text-lg text-slate-500 mb-10 max-w-3xl mx-auto font-light">
-            We treat enterprise AI as a reconfigurable system: balancing deterministic software and agentic intelligence through measurement, feedback, and supervised control loops.
+            SafeMind Lab treats enterprise AI as a reconfigurable system: balancing deterministic software and agentic intelligence through measurement, feedback, and supervised control loops.
           </p>
           <div className="flex flex-col items-center">
             <Link

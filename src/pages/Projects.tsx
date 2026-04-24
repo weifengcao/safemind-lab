@@ -1,29 +1,9 @@
 import { Link } from 'react-router-dom';
 import { ChevronRight, Cpu, ShieldCheck } from 'lucide-react';
 import SEO from '../components/SEO';
+import { projectSummaries } from '../content/projects';
 
 export default function Projects() {
-  const projects = [
-    {
-      id: 'soc-agent',
-      title: 'SOC Triage Agent',
-      domain: 'Cybersecurity',
-      desc: 'A concrete investigation workload for validating alert normalization, evidence gathering, risk scoring, action gating, and structured triage verdicts.',
-      tags: ['Python', 'Harness Workload'],
-      icon: <ShieldCheck size={32} className="text-blue-600" />,
-      link: '/projects/soc-agent'
-    },
-    {
-      id: 'fintech-compliance',
-      title: 'Fintech Compliance Agent',
-      domain: 'Financial Services',
-      desc: 'A policy-heavy workload for testing auditability, evidence provenance, policy mapping, compliance reasoning, and human review boundaries.',
-      tags: ['Policy-as-Code', 'Evaluation'],
-      icon: <Cpu size={32} className="text-indigo-600" />,
-      link: '/projects/fintech-compliance'
-    }
-  ];
-
   return (
     <div className="pb-24">
       <SEO
@@ -41,7 +21,7 @@ export default function Projects() {
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {projects.map((project) => (
+          {projectSummaries.map((project) => (
             <Link
               key={project.id}
               to={project.link}
@@ -50,7 +30,11 @@ export default function Projects() {
               <div className="aspect-[16/10] bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-center mb-8 shadow-sm group-hover:border-slate-300 transition-all">
                 <div className="w-full h-full bg-gradient-to-br from-slate-50 to-white flex items-center justify-center">
                   <div className="p-6 rounded-xl bg-white shadow-sm border border-slate-100 group-hover:scale-110 transition-transform duration-500">
-                    {project.icon}
+                    {project.accent === 'blue' ? (
+                      <ShieldCheck size={32} className="text-blue-600" />
+                    ) : (
+                      <Cpu size={32} className="text-indigo-600" />
+                    )}
                   </div>
                 </div>
               </div>

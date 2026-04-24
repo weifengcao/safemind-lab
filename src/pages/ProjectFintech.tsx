@@ -1,4 +1,4 @@
-import { ArrowLeft, Landmark, FileText, CheckCircle, BarChart3, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Landmark, FileText, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
@@ -30,7 +30,7 @@ export default function ProjectFintech() {
             <div className="p-10 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
                 <Landmark className="text-blue-600 mb-6" size={32} />
                 <h3 className="text-lg font-bold mb-3 text-slate-900 uppercase">Regulatory Audits</h3>
-                <p className="text-slate-500 text-sm font-light leading-relaxed">Automated mapping of transaction logs to specific AML and KYC policies.</p>
+                <p className="text-slate-500 text-sm font-light leading-relaxed">Structured mapping of transaction logs to specific AML and KYC policies.</p>
             </div>
             <div className="p-10 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
                 <FileText className="text-indigo-600 mb-6" size={32} />

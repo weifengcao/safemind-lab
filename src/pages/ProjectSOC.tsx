@@ -1,4 +1,4 @@
-import { ShieldCheck, Play, ArrowLeft, Terminal, Workflow, FileSearch, ChevronRight } from 'lucide-react';
+import { ShieldCheck, Play, ArrowLeft, Terminal, Workflow, FileSearch } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
@@ -7,7 +7,7 @@ export default function ProjectSOC() {
     <div className="pb-24">
       <SEO 
         title="SOC Triage Agent Case Study" 
-        description="Autonomous alert investigation and triage for modern security operations centers. This project demonstrates the SafeMind Harness's ability to manage complex evidence-gathering workflows with high reliability."
+        description="Assisted alert investigation and triage for modern security operations centers. This project demonstrates how the SafeMind Harness can structure complex evidence-gathering workflows."
       />
       <div className="max-w-4xl mx-auto px-4 mt-12 mb-8">
         <Link to="/projects" className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-blue-600 transition-colors">
@@ -22,18 +22,18 @@ export default function ProjectSOC() {
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold mb-6 italic text-slate-900 leading-tight tracking-tight">SOC Triage Agent</h1>
           <p className="text-xl text-slate-500 font-light leading-relaxed">
-            Autonomous alert investigation and triage for modern security operations centers. Demonstrating high reliability in complex evidence-gathering.
+            Assisted alert investigation and triage for modern security operations centers. Demonstrating structured evidence gathering, policy checks, and review-ready verdicts.
           </p>
         </header>
 
         <section className="mb-20">
-          <div className="aspect-video bg-slate-50 rounded-3xl border border-slate-100 flex items-center justify-center overflow-hidden group cursor-pointer shadow-sm hover:shadow-md transition-all">
+          <div className="aspect-video bg-slate-50 rounded-3xl border border-slate-100 flex items-center justify-center overflow-hidden group shadow-sm hover:shadow-md transition-all">
              <div className="absolute inset-0 bg-gradient-to-tr from-blue-50 to-white opacity-50" />
              <div className="relative z-10 flex flex-col items-center">
                 <div className="w-20 h-20 rounded-full bg-slate-900 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
                   <Play size={32} fill="currentColor" />
                 </div>
-                <span className="mt-6 font-bold text-slate-900 text-xs uppercase tracking-widest">WATCH PROJECT WALKTHROUGH</span>
+                <span className="mt-6 font-bold text-slate-900 text-xs uppercase tracking-widest">Architecture Preview</span>
              </div>
           </div>
         </section>
@@ -46,7 +46,7 @@ export default function ProjectSOC() {
                 SOC analysts are overwhelmed by the 'alert treadmill.' High volumes of low-fidelity signals bury critical threats. Existing SOAR automation is too brittle to handle the nuance of investigation.
               </p>
               <p>
-                The SOC Triage Agent replaces strict SOAR playbooks with a flexible, goal-oriented agentic harness that understands the <i>meaning</i> of the data it finds.
+                The SOC Triage Agent explores how strict SOAR playbooks can be complemented by a goal-oriented harness that preserves evidence, policy boundaries, and human review.
               </p>
             </div>
           </section>

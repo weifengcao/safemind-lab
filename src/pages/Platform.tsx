@@ -31,7 +31,7 @@ export default function Platform() {
         { icon: <GitBranch size={20} />, title: 'Workflow Decomposition', text: 'Separate deterministic steps, judgment-heavy steps, human approval points, and tool-mediated actions.' },
         { icon: <BarChart3 size={20} />, title: 'Quantitative Tradeoffs', text: 'Measure where agents improve throughput or decision quality, and where SaaS-style deterministic logic remains better.' },
         { icon: <Lock size={20} />, title: 'Versioned Proposals', text: 'Supervisor agents can propose architecture changes, but rollout happens through versioning and human-in-the-loop review.' },
-        { icon: <Workflow size={20} />, title: 'Incremental Adoption', text: 'Existing workflows can start with agent-assisted review, then gradually move toward bounded autonomous execution.' }
+        { icon: <Workflow size={20} />, title: 'Incremental Adoption', text: 'Existing workflows can start with agent-assisted review, then gradually move toward bounded execution for well-scoped actions.' }
       ]
     }
   ];

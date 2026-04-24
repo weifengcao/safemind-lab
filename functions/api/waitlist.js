@@ -63,7 +63,7 @@ export async function onRequestPost(context) {
         return new Response(
             JSON.stringify({
                 success: true,
-                message: 'Thank you for joining the waitlist! We will be in touch soon.'
+                message: 'Thank you. Your submission was received.'
             }),
             {
                 status: 200,

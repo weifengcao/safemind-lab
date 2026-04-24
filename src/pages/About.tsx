@@ -1,5 +1,4 @@
-import { motion } from 'motion/react';
-import { Github, Linkedin, Mail, Cpu, Workflow, Shield, BarChart3 } from 'lucide-react';
+import { Github, Mail, Cpu, Workflow, Shield, BarChart3 } from 'lucide-react';
 import SEO from '../components/SEO';
 
 export default function About() {
@@ -44,7 +43,6 @@ export default function About() {
             </div>
 
             <div className="flex justify-center md:justify-start gap-4 p-4">
-              <a href="#" className="p-3 rounded-full bg-slate-50 border border-slate-100 text-slate-400 hover:text-blue-600 transition-colors shadow-sm"><Linkedin size={18} /></a>
               <a href="https://github.com/safemind-lab" className="p-3 rounded-full bg-slate-50 border border-slate-100 text-slate-400 hover:text-blue-600 transition-colors shadow-sm"><Github size={18} /></a>
               <a href="mailto:contact@safemindlab.com" className="p-3 rounded-full bg-slate-50 border border-slate-100 text-slate-400 hover:text-blue-600 transition-colors shadow-sm"><Mail size={18} /></a>
             </div>

@@ -2,33 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, Clock, Tag } from 'lucide-react';
 import { motion } from 'motion/react';
 import SEO from '../components/SEO';
-
-export const BLOG_POSTS = [
-  {
-    slug: "context-engineering-vs-harness-engineering",
-    title: "Context Engineering vs. Harness Engineering",
-    excerpt: "Why building a better harness is more impactful than endlessly tweaking prompt context windows.",
-    date: "2024-03-15",
-    readTime: "8 min read",
-    category: "Architecture"
-  },
-  {
-    slug: "what-breaks-first-in-agentic-systems",
-    title: "What Breaks First in Agentic Systems",
-    excerpt: "Lessons learned from deploying autonomous agents in production security environments.",
-    date: "2024-02-28",
-    readTime: "12 min read",
-    category: "Production"
-  },
-  {
-    slug: "policy-and-auditability-in-ai-workflows",
-    title: "Policy and Auditability in AI Workflows",
-    excerpt: "How to design agent systems that can be trusted by compliance and legal teams.",
-    date: "2024-02-10",
-    readTime: "10 min read",
-    category: "Governance"
-  }
-];
+import { blogPosts } from '../content/blog';
 
 export default function Blog() {
   return (
@@ -46,7 +20,7 @@ export default function Blog() {
 
       <section className="max-w-4xl mx-auto px-4 mt-16">
         <div className="space-y-16">
-          {BLOG_POSTS.map((post, idx) => (
+          {blogPosts.map((post, idx) => (
             <motion.article 
               key={post.slug}
               initial={{ opacity: 0, y: 20 }}

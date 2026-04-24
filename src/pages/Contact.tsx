@@ -1,9 +1,12 @@
-import { Mail, Linkedin, Github, Globe, ArrowRight } from 'lucide-react';
+import { useState, type ReactNode } from 'react';
+import { Mail, Github, Globe, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import SEO from '../components/SEO';
 import ChatWidget from '../components/ChatWidget';
 
 export default function Contact() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   return (
     <div className="pb-24">
       <SEO 
@@ -27,13 +30,6 @@ export default function Contact() {
               subtext="contact@safemindlab.com"
             />
             <ContactLink 
-              icon={<Linkedin size={20} />}
-              title="LinkedIn"
-              text="Professional networking"
-              link="https://linkedin.com"
-              subtext="Connect with me"
-            />
-            <ContactLink 
               icon={<Github size={20} />}
               title="GitHub"
               text="Review the harness"
@@ -44,8 +40,8 @@ export default function Contact() {
               icon={<Globe size={20} />}
               title="Office Hours"
               text="Schedule a deep dive"
-              link="#"
-              subtext="15m rapid architecture review"
+              link="mailto:contact@safemindlab.com?subject=SafeMind%20Lab%20office%20hours"
+              subtext="Request a 15m architecture review"
             />
         </div>
 
@@ -66,7 +62,7 @@ export default function Contact() {
               <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
               </div>
-              <span><strong>Hiring:</strong> Prioritizing staff roles at infrastructure-first AI companies.</span>
+              <span><strong>Collaboration:</strong> Open to focused conversations with infrastructure-first AI teams.</span>
             </li>
           </ul>
         </motion.div>
@@ -74,26 +70,21 @@ export default function Contact() {
 
       {/* Live Chat Widget Trigger Integrated into Page Context */}
       <div className="max-w-4xl mx-auto px-4 mt-12 text-center">
-        <p className="text-sm text-slate-400 font-bold uppercase tracking-widest mb-4">Want a faster response?</p>
+        <p className="text-sm text-slate-400 font-bold uppercase tracking-widest mb-4">Want to frame the discussion?</p>
         <button 
-          onClick={() => {
-            // Trigger the global widget if it was global, but here it's on this page
-            // We'll rely on the floating bubble being the primary actor
-            const chatBubble = document.querySelector('[aria-label="Toggle chat"]') as HTMLButtonElement;
-            if (chatBubble) chatBubble.click();
-          }}
+          onClick={() => setIsChatOpen(true)}
           className="text-blue-600 hover:text-indigo-600 font-bold transition-colors underline underline-offset-4"
         >
-          Start a real-time conversation now
+          Open the message helper
         </button>
       </div>
 
-      <ChatWidget />
+      <ChatWidget isOpen={isChatOpen} onOpenChange={setIsChatOpen} />
     </div>
   );
 }
 
-function ContactLink({ icon, title, text, link, subtext }: { icon: React.ReactNode, title: string, text: string, link: string, subtext: string }) {
+function ContactLink({ icon, title, text, link, subtext }: { icon: ReactNode, title: string, text: string, link: string, subtext: string }) {
   return (
     <a 
       href={link} 
