@@ -144,10 +144,11 @@ Each card contains:
 - CTA to project detail page
 
 #### E. Blog / Design Principles Preview
-3 featured posts:
-- Context Engineering vs Harness Engineering
-- What Breaks First in Agentic Systems
-- Policy and Auditability in AI Workflows
+Featured series: **Operationalizing Enterprise AI**
+1. Beyond the Chatbot: The Governance Crisis in Enterprise AI
+2. Designing a Governed Multi-Agent System: The Harness/Domain Pack Pattern
+3. Measurable Autonomy: Experiments in Automated SOC Triage
+4. Managed Agent Lifecycles: The Future of Safe AI
 
 #### F. About Preview
 Short bio, one paragraph only.

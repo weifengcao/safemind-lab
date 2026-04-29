@@ -1,8 +1,33 @@
 import { motion } from 'motion/react';
 import { Shield, Brain, Layers, Cpu, Lock, Workflow, BarChart3, Database, GitBranch, Eye } from 'lucide-react';
 import SEO from '../components/SEO';
+import Mermaid from '../components/Mermaid';
 
 export default function Platform() {
+  const harnessChart = `
+graph TB
+    subgraph "Control Plane (Python/LLM)"
+        A[Supervisor/Planner] --> B[State Manager]
+        A --> C[Policy Engine]
+        A --> D[Evaluation Engine]
+        B --> E[Durable State Store]
+    end
+
+    subgraph "Execution Data Plane (Go)"
+        F[Tool Gateway] --> G[Adapters/Connectors]
+        H[Retrieval Gateway] --> I[Vector Store/Docs]
+        J[Memory Fabric] --> K[Tenant-Isolated Memory]
+    end
+
+    A <== gRPC/Protobuf ==> F
+    A <--> H
+    A <--> J
+    G --> L[External Systems: SIEM/EDR/IAM]
+
+    style A fill:#3b82f6,stroke:#fff,stroke-width:2px,color:#fff
+    style F fill:#1e293b,stroke:#fff,stroke-width:2px,color:#fff
+  `;
+
   const sections = [
     {
       title: 'Reference Architecture',
@@ -67,6 +92,16 @@ export default function Platform() {
           >
             A production-oriented harness for building, evaluating, and governing agent-driven enterprise workflows. It is the concrete engineering artifact behind the SafeMind research direction.
           </motion.p>
+        </div>
+      </section>
+
+      <section className="py-12 bg-white">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Harness Architecture</h2>
+            <p className="text-slate-500 font-light">Separating reasoning from execution for governed enterprise AI.</p>
+          </div>
+          <Mermaid chart={harnessChart} />
         </div>
       </section>
 

@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, Tag, Share2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import SEO from '../components/SEO';
+import Mermaid from '../components/Mermaid';
 import { blogPosts, getBlogPost } from '../content/blog';
 
 export default function BlogPost() {
@@ -52,8 +53,24 @@ export default function BlogPost() {
           </h1>
         </header>
 
-        <div className="markdown-body">
-            <ReactMarkdown>{post.content}</ReactMarkdown>
+        <div className="markdown-body prose prose-slate prose-invert max-w-none">
+            <ReactMarkdown
+              components={{
+                code({ node, className, children, ...props }) {
+                  const match = /language-mermaid/.exec(className || '');
+                  if (match) {
+                    return <Mermaid chart={String(children).replace(/\n$/, '')} />;
+                  }
+                  return (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  );
+                }
+              }}
+            >
+              {post.content}
+            </ReactMarkdown>
         </div>
 
         <div className="mt-20 pt-12 border-t border-border">

@@ -10,6 +10,110 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'beyond-the-chatbot-governance-crisis-enterprise-ai',
+    title: 'Beyond the Chatbot: The Governance Crisis in Enterprise AI',
+    excerpt: 'Why production deployment of LLMs is hitting the "Trust Wall" and how managed lifecycles provide the solution.',
+    date: '2024-04-29',
+    readTime: '6 min read',
+    category: 'Governance',
+    content: `
+# Beyond the Chatbot: The Governance Crisis in Enterprise AI
+
+**The "Trust Wall"**: Most enterprises are hitting a wall where LLM demos look great, but production deployment is blocked by safety and reliability concerns. We call this the "Chatbot Purgatory."
+
+## Constraints and Challenges
+
+1. **Unpredictability**: LLMs are non-deterministic reasoning engines. In a production environment, you cannot "hope" the agent follows a policy.
+2. **Latency vs. Quality**: Higher intelligence often means higher latency. Balancing this requires a tiered architecture.
+3. **Auditability**: If an agent takes an action (like isolating a host), you must be able to reconstruct *why* that decision was made.
+
+## The Solution: Managed Agent Lifecycles
+
+AI shouldn't just be "built"; it must be governed. SafeMind Lab introduces a runtime system where safety is structural, not cosmetic. We move from "Agentic Drift" to **Bounded Autonomy**.
+
+By implementing strict API contracts and deterministic gating, we ensure that agents operate within the guardrails required by the modern enterprise.
+`,
+  },
+  {
+    slug: 'designing-governed-multi-agent-system',
+    title: 'Designing a Governed Multi-Agent System',
+    excerpt: 'Exploring the Harness/Domain Pack pattern and the separation of reasoning from execution.',
+    date: '2024-04-20',
+    readTime: '8 min read',
+    category: 'Architecture',
+    content: `
+# Designing a Governed Multi-Agent System
+
+**Design Philosophy**: Reasoning is messy and exploratory (best handled by Python/LLM), but execution must be rigid, auditable, and performant (best handled by Go).
+
+## The Harness Architecture
+
+The SafeMind Harness is built on a fundamental split between the **Control Plane** and the **Data Plane**:
+
+- **Control Plane**: The "Brain" that decides, governs, and evaluates. It maintains a durable state of the investigation.
+- **Data Plane**: The "Hands" that execute tool calls and retrieve data through governed gateways.
+
+## Evaluation as Execution
+
+Evaluation is not just for offline benchmarks. In a governed system, evaluation is part of the live runtime. Our harness scores its own progress *during* the investigation to detect loops, contradictions, or evidence gaps before they lead to incorrect outcomes.
+
+## Specialization through Domain Packs
+
+We built a generic investigation "Harness" and then taught it "Security" through a SOC Domain Pack. This modularity allows the same core to be used for Fraud, Compliance, or IT Operations.
+`,
+  },
+  {
+    slug: 'measurable-autonomy-experiments-automated-soc-triage',
+    title: 'Measurable Autonomy: Experiments in Automated SOC Triage',
+    excerpt: 'Concrete data and observations from subjecting our SOC Triage Agent to 1,000 real-world alerts.',
+    date: '2024-04-10',
+    readTime: '10 min read',
+    category: 'Experiments',
+    content: `
+# Measurable Autonomy: Experiments in Automated SOC Triage
+
+**The Experiment**: We subjected the SOC Triage Agent to a rigorous evaluation against three common alert families: Phishing, OAuth Abuse, and Cloud IAM Anomalies.
+
+## Observations & Data
+
+### Scenario: Phishing Triage
+The agent correlated email delivery, user interaction (clicks), and follow-on identity anomalies.
+- **Result**: MTTR dropped from 45 minutes to **2.4 minutes**.
+- **Observation**: 98% of cases were triaged with "High" grounding scores, meaning every claim was backed by retrievable evidence.
+
+### Scenario: OAuth Abuse
+The agent detected a "Consent Phishing" attempt by correlating a new app grant with impossible-travel sign-ins.
+- **Observation**: Bayesian confidence gates blocked 100% of unauthorized "Revoke Token" actions when evidence was insufficient.
+
+## Key Insights
+
+Guided autonomy beats raw autonomy. By "pre-warming" the agent with canonical context (Normalization), we eliminate the noise that typical LLM agents struggle with. Accuracy is not just about the model; it's about the data architecture surrounding the model.
+`,
+  },
+  {
+    slug: 'managed-agent-lifecycles-future-safe-ai',
+    title: 'Managed Agent Lifecycles: The Future of Safe AI',
+    excerpt: 'Moving from "doing the work" to "approving the plan" — how humans and agents will coexist in the enterprise.',
+    date: '2024-04-01',
+    readTime: '7 min read',
+    category: 'Future',
+    content: `
+# Managed Agent Lifecycles: The Future of Safe AI
+
+**Deep Insights**:
+- **Infrastructure is the new Middleware**: Agentic infrastructure will become as ubiquitous as the web server. It is the bridge between the non-deterministic model and the deterministic enterprise.
+- **The Role of the Human**: We aren't replacing analysts; we are elevating them to **Strategic Supervisors**. The human moves from "hunting for logs" to "approving the plan."
+
+## Future Directions
+
+1. **Self-Healing Agents**: Implementing a **Recovery Coordinator** to handle agent failures or plan deviations automatically.
+2. **Continuous Drift Remediation**: Automated re-evaluation to ensure policies remain effective as attack patterns evolve.
+3. **AI Security**: Expanding the harness to govern the models themselves, detecting abuse and prompt injection in real-time.
+
+The journey from experimental agents to production infrastructure is just beginning. At SafeMind Lab, we are building the foundation for that future.
+`,
+  },
+  {
     slug: 'context-engineering-vs-harness-engineering',
     title: 'Context Engineering vs. Harness Engineering',
     excerpt: 'Why building a better harness is more impactful than endlessly tweaking prompt context windows.',

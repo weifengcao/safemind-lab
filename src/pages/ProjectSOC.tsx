@@ -1,8 +1,26 @@
 import { ShieldCheck, Play, ArrowLeft, Terminal, Workflow, FileSearch } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import Mermaid from '../components/Mermaid';
 
 export default function ProjectSOC() {
+  const socLifecycleChart = `
+sequenceDiagram
+    participant V as Vendor (CrowdStrike/SentinelOne)
+    participant I as Ingest API (Canonical Alert)
+    participant C as Classifier (Alert Family)
+    participant P as Playbook (Deterministic Plan)
+    participant H as Harness (Execution)
+    participant A as Analyst (Review)
+
+    V->>I: Raw Webhook
+    I->>C: Canonical Alert Object
+    C->>P: Match Family (e.g., Phishing)
+    P->>H: Seed Investigation + Response Guidance
+    H->>H: Execute Plan (Governed)
+    H->>A: Handoff with Evidence & Rationale
+  `;
+
   return (
     <div className="pb-24">
       <SEO 
@@ -52,6 +70,11 @@ export default function ProjectSOC() {
           </section>
 
           <section>
+            <h2 className="text-3xl font-bold mb-8 text-slate-900 tracking-tight">Investigation Lifecycle</h2>
+            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-sm mb-12">
+               <Mermaid chart={socLifecycleChart} />
+            </div>
+            
             <h2 className="text-3xl font-bold mb-8 text-slate-900 tracking-tight">System Architecture</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {[
