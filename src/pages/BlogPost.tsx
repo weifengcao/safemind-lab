@@ -5,65 +5,91 @@ import { BLOG_POSTS } from './Blog';
 import SEO from '../components/SEO';
 
 const SAMPLE_CONTENT: Record<string, string> = {
+  "enterprise-ai-is-a-systems-problem": `
+# Enterprise AI Is Not a Model Problem — It’s a Systems Problem
+
+Over the past two years, enterprise AI has been treated primarily as a model problem: which LLM to use, how to prompt it, and how to add retrieval.
+
+This framing breaks down in production.
+
+LLMs do not fail in isolation — systems do.
+
+## What actually breaks
+
+In real environments like security, fintech, and infrastructure, you are not optimizing for generating answers. You are optimizing for:
+
+- Correctness under uncertainty
+- Bounded execution (time, cost, risk)
+- Auditability and replay
+- Policy enforcement
+- Consistency at scale
+
+A simple pipeline (alert → LLM → answer) fails because inputs are noisy, reasoning is multi-step, and outputs must be safe and auditable.
+
+## The missing layer: systems
+
+Production AI requires more than models. It requires a system with structure.
+
+### Determinism before AI
+
+Validate, normalize, deduplicate, and suppress before calling any model.
+
+### Stateful execution
+
+Agents must track progress: what evidence exists, what is missing, and what has been attempted.
+
+### Separation of reasoning and decision
+
+Model output is a hypothesis — not a final decision.
+
+A system must evaluate completeness, detect contradictions, and compute confidence.
+
+### Bounded loops
+
+Every investigation must be constrained by budgets: time, tokens, tool calls, and depth.
+
+### Policy enforcement
+
+No model should directly execute actions. All actions must pass through policy and approval layers.
+
+### Memory as a system
+
+Different memory types serve different roles: hot state, metadata, semantic patterns, and feedback.
+
+### Evaluation and feedback
+
+Systems must continuously measure and improve using both online and offline evaluation.
+
+## A different framing
+
+The right question is not “how do we build an agent?” but:
+
+What is the control plane for AI execution?
+
+This includes orchestration, state management, policy, evaluation, and observability.
+
+## Where this leads
+
+Instead of prompt-driven agents, we need governed systems with bounded execution and auditability.
+
+## Next
+
+In the next post, we will break down the architecture behind a governed agent harness and how it enables production-grade AI systems.
+  `,
   "context-engineering-vs-harness-engineering": `
 # Context Engineering vs. Harness Engineering
 
-The current obsession with "prompt engineering" and "context window optimization" misses the fundamental tectonic shift required for production AI: **Harness Engineering**.
-
-In the early days of agent development, we focused on how to *stuff* more into the prompt. How to give the agent more instructions, more few-shot examples, and more retrieved snippets. This stage, while productive, has hit a point of diminishing returns.
-
-## What is Harness Engineering?
-
-Harness Engineering is the discipline of building the infrastructure *around* the model. It is the realization that the model is just a non-deterministic CPU, and like any CPU, it needs an operating system to manage memory, I/O, and safety.
-
-### The Three Pillars of a Hardened Harness:
-
-1. **State Formalization:** Moving away from a monolithic "history" string and toward a structured state object that persists across runs.
-2. **Deterministic Gating:** Using the model to propose actions, but using code to validate and execute them.
-3. **Execution Isolation:** Ensuring that if an agent triggers a tool that fails or hangs, the entire system doesn't crash.
-
-## Why it Matters
-
-When we deploy agents in high-stakes environments like a Security Operations Center (SOC), we cannot afford "stochastic hallucinations." Any autonomous action must be defensible. A good harness provides the **provenance** needed to trust the agent's verdict.
-
-If you want to build a better agent, stop tweaking your prompts. Start building a better harness.
+...existing content...
   `,
   "what-breaks-first-in-agentic-systems": `
 # What Breaks First in Agentic Systems
 
-After deploying multiple agentic workloads into production security environments, we've identified a recurring pattern of failure. It isn't usually the model "getting it wrong"—it's the system failing around the model.
-
-## 1. Tool-Call Ambiguity
-Models are remarkably good at calling tools, but they are equally good at hallucinating tool signatures when they feel "constrained." Without strict schema enforcement at the harness level, these hallucinations lead to silent failures.
-
-## 2. Context Poisoning
-As soon as an agent ingests external data (like an EDR log or a web page), it is exposed to potential injection. If the harness doesn't treat external data as untrusted, the agent's reasoning loop can be hijacked.
-
-## 3. Latency Cascades
-Sequential reasoning loops (Think -> Act -> Observe -> Repeat) stack latency. In high-volume triage, a 5-step investigation taking 60 seconds is often too slow. Parallelization within the harness is essential for production parity.
-
-## Conclusion
-
-Building systems that thrive under these conditions requires a move toward **explicit orchestration**. We must design for failure rather than assuming the agent will "figure it out."
+...existing content...
   `,
   "policy-and-auditability-in-ai-workflows": `
 # Policy and Auditability in AI Workflows
 
-The greatest barrier to AI adoption in highly regulated industries (Fintech, Healthcare, Defense) isn't model quality—it's **trust**. Specifically, the ability to audit *why* a decision was made.
-
-## Designing for Auditability
-
-In the SafeMind Harness, we treat every decision as a node in a graph. Each node contains:
-- The input context
-- The specific policy being evaluated
-- The model's reasoning
-- The confidence score
-
-## The Role of Policy-as-Code
-
-By translating legal or operational policies into structured checks (Policy-as-Code), we give the agent a "rulebook" it cannot ignore. Instead of asking the model to "be compliant," we force it to check its proposed actions against a deterministic validator.
-
-This hybrid approach—LLM for reasoning, Code for enforcement—is the only way to satisfy the requirements of a modern compliance department.
+...existing content...
   `
 };
 
