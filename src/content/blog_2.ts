@@ -3,117 +3,115 @@ import type { BlogPost } from './blog';
 export const blog2: BlogPost = {
   slug: 'designing-a-governed-agent-harness',
   title: 'Designing a Governed Agent Harness for Enterprise AI',
-  excerpt: 'How to move from prompt-based agents to production-grade systems with control planes, state, policy, and evaluation.',
+  excerpt: 'A technical framework for building production-grade agent systems with control planes, memory routing, policy enforcement, and evaluation loops.',
   date: '2026-04-29',
-  readTime: '14 min read',
+  readTime: '15 min read',
   category: 'Architecture',
   content: `# Designing a Governed Agent Harness for Enterprise AI
 
-In the previous post, we established that enterprise AI is fundamentally a systems problem.
+## Abstract
 
-This post answers the next question:
+Enterprise AI systems require more than model integration. They require structured execution, deterministic control, and bounded reasoning. This document presents a reference architecture for a governed agent harness, designed to enable reliable, auditable, and scalable AI-driven decision systems.
 
-**What does that system actually look like?**
+## 1. Problem Statement
 
-## The architecture
+Traditional agent systems integrate prompting, retrieval, reasoning, and execution within a single loop. This results in:
+
+- lack of execution control
+- weak decision boundaries
+- limited auditability
+
+A production system must separate these concerns.
+
+## 2. System Architecture
 
 [[diagram:harness]]
 
-At a high level, the system is structured into four layers:
+The system is composed of four layers:
 
-- Domain Pack (business logic)
-- Control Plane (reasoning + decision)
-- Data Plane (execution)
-- Memory + Observability (context + traceability)
+- Domain Pack
+- Control Plane
+- Data Plane
+- Memory & Observability
 
-### Why this separation matters
+### 2.1 Domain Pack
 
-Most agent systems collapse these layers into one.
+Encapsulates domain-specific logic including schemas, tools, prompts, and workflows.
 
-That leads to:
-- unbounded execution
-- unsafe actions
-- no auditability
+### 2.2 Control Plane
 
-This architecture enforces separation of concerns:
+Coordinates system behavior. Responsible for orchestration, context construction, reasoning, evaluation, and policy enforcement.
 
-- Control plane decides
-- Data plane executes
-- Memory provides context
+### 2.3 Data Plane
 
-This is the same principle used in distributed systems and cloud infrastructure.
+Executes tool calls and external interactions. Stateless and isolated.
 
-## Control plane: the real system
+### 2.4 Memory Fabric
 
-The control plane is the most important part.
+Provides multi-layer context including:
 
-It contains:
+- operational state
+- metadata retrieval
+- semantic retrieval (RAG)
+- knowledge base
+- feedback loops
 
-- Planner → defines what to do
-- Memory Router → defines what to know
-- Reasoner → defines what it means
-- Evaluator → defines whether it is enough
-- Policy Engine → defines what is allowed
+## 3. Control Plane Design
 
-This turns AI from a stateless function into a governed system.
+The control plane includes the following components:
 
-## The investigation loop
+### Planner
+Defines execution DAGs and investigation strategy.
+
+### Memory Router
+Aggregates context from multiple retrieval systems. RAG is implemented as one retrieval strategy within this component.
+
+### Reasoner
+Synthesizes evidence and generates hypotheses.
+
+### Evaluator
+Determines sufficiency of evidence and controls loop termination.
+
+### Policy Engine
+Enforces safety, compliance, and approval requirements.
+
+## 4. Execution Model
 
 [[diagram:loop]]
 
-This loop is the core execution primitive.
+The system operates as a bounded investigation loop:
 
-Unlike typical agent frameworks, it is:
+1. Plan
+2. Retrieve context (including RAG)
+3. Execute tools
+4. Synthesize evidence
+5. Reason
+6. Evaluate
 
-- stateful (tracks progress)
-- bounded (controlled by budgets)
-- evaluated (decision at every step)
+The evaluator determines whether to continue or terminate.
 
-### Step-by-step
+## 5. Key Properties
 
-1. Planner creates a DAG of investigation steps
-2. Workers collect evidence in parallel
-3. Synthesizer normalizes data into facts
-4. Reasoner generates hypotheses
-5. Evaluator decides whether to stop or continue
+### 5.1 Statefulness
+Maintains persistent context across iterations.
 
-If insufficient:
-- replan
-- collect targeted evidence
+### 5.2 Bounded Execution
+Enforces limits on cost, time, and steps.
 
-If sufficient:
-- produce decision
-- pass through policy
+### 5.3 Separation of Concerns
+Decouples reasoning, execution, and policy.
 
-### Why this matters
+### 5.4 Auditability
+Captures full execution trace for analysis and compliance.
 
-Without this loop, systems either:
+## 6. Role of RAG
 
-- stop too early (low confidence)
-- run too long (high cost)
+RAG is implemented within the Memory Router as a semantic retrieval mechanism. It does not control execution or decision-making.
 
-This loop balances correctness and efficiency.
+## 7. Conclusion
 
-## Policy as a first-class system
+A governed agent harness enables reliable AI systems by enforcing structure, control, and evaluation.
 
-Policy is not a prompt.
-
-It is a deterministic layer that:
-
-- gates actions
-- enforces approvals
-- prevents unsafe execution
-
-This is critical in enterprise environments.
-
-## Final thought
-
-This architecture is not about making agents smarter.
-
-It is about making them reliable.
-
-Agents are not prompts.
-
-They are governed systems.
+> Agents are not standalone entities. They are coordinated systems operating under constraints.
 `
 };
