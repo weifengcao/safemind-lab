@@ -1,4 +1,3 @@
-import type { BlogPost } from './blog';
 import { blog1 } from './blog_1';
 import { blog2 } from './blog_2';
 
