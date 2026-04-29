@@ -5,6 +5,14 @@ import SEO from '../components/SEO';
 
 export const BLOG_POSTS = [
   {
+    slug: "enterprise-ai-is-a-systems-problem",
+    title: "Enterprise AI Is Not a Model Problem — It’s a Systems Problem",
+    excerpt: "Why production AI agents need orchestration, state, policy, evaluation, memory, and feedback loops — not just better prompts or larger models.",
+    date: "2026-04-29",
+    readTime: "11 min read",
+    category: "Enterprise AI"
+  },
+  {
     slug: "context-engineering-vs-harness-engineering",
     title: "Context Engineering vs. Harness Engineering",
     excerpt: "Why building a better harness is more impactful than endlessly tweaking prompt context windows.",
