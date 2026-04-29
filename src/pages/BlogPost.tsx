@@ -1,8 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Clock, Tag } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import SEO from '../components/SEO';
-import { BLOG_POSTS, getBlogPost } from '../content/blog';
+import { getBlogPost } from '../content/blog';
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -36,7 +35,27 @@ export default function BlogPost() {
         </header>
 
         <div className="markdown-body">
-          <ReactMarkdown>{post.content}</ReactMarkdown>
+          <ReactMarkdown
+            components={{
+              img: ({ src, alt }) => (
+                <figure className="my-12 -mx-4 md:-mx-24 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+                  <img
+                    src={src || ''}
+                    alt={alt || ''}
+                    className="w-full h-auto rounded-xl"
+                    loading="lazy"
+                  />
+                  {alt ? (
+                    <figcaption className="mt-3 text-center text-xs text-slate-500">
+                      {alt}
+                    </figcaption>
+                  ) : null}
+                </figure>
+              ),
+            }}
+          >
+            {post.content}
+          </ReactMarkdown>
         </div>
       </article>
     </div>
