@@ -7,7 +7,7 @@ export default function ProjectFintech() {
     <div className="pb-24">
       <SEO 
         title="Fintech Compliance Agent Case Study" 
-        description="Applying the SafeMind Harness to the rigors of financial regulation. This project demonstrates how our structured investigation state adapts to policy-heavy audit workloads."
+        description="Applying the SafeMind Harness to the rigors of financial regulation. This project demonstrates how the structured investigation state adapts to policy-heavy audit workloads."
       />
       <div className="max-w-4xl mx-auto px-4 mt-12 mb-8">
         <Link to="/projects" className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-blue-600 transition-colors">

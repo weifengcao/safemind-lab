@@ -11,7 +11,7 @@ export default function Contact() {
     <div className="pb-24">
       <SEO 
         title="Connect with the Lab" 
-        description="Have a technical challenge or an architecture you'd like to discuss? Reach out through any of our channels for advisory or partnership discussions."
+        description="Have a technical challenge or an architecture you'd like to discuss? Reach out through any of these channels for advisory or partnership discussions."
       />
       <section className="pt-24 pb-20 border-b border-slate-100 bg-slate-50">
         <div className="max-w-4xl mx-auto px-4">

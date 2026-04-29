@@ -8,12 +8,12 @@ Stack: React (frontend) + Node.js/Express (backend)
 
 ## 1. Product Goal
 
-SafeMind Lab is a personal engineering hub for showcasing:
+SafeMind Lab is an engineering hub for showcasing:
 - the SafeMind Harness platform
 - selected projects built on top of it
 - technical writing and design principles
 - GitHub proof of work
-- personal profile and contact paths
+- profile and contact paths
 
 This site should feel like a **serious AI systems engineer portfolio**, not a startup marketing site and not a general blog.
 
@@ -114,7 +114,7 @@ Suggested headline:
 **Building production-grade agent systems with a focus on orchestration, context, and reliability.**
 
 Suggested subheadline:
-**SafeMind Lab is my personal engineering hub for designing agent harnesses and validating them through real-world investigation workloads such as SOC and compliance.**
+**SafeMind Lab is an engineering hub for designing agent harnesses and validating them through real-world investigation workloads such as SOC and compliance.**
 
 Hero CTAs:
 - Explore Platform
@@ -642,7 +642,7 @@ This site is about SafeMind Lab only.
 
 Use this across the site:
 
-**SafeMind Lab is a personal engineering hub for designing production-grade agent systems with a focus on orchestration, context, and reliability.**
+**SafeMind Lab is an engineering hub for designing production-grade agent systems with a focus on orchestration, context, and reliability.**
 
 ---
 

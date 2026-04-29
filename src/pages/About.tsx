@@ -12,7 +12,7 @@ export default function About() {
         <div className="max-w-4xl mx-auto px-4">
           <h1 className="text-4xl font-extrabold mb-6 text-slate-900 tracking-tight">Research-minded engineering</h1>
           <p className="text-xl text-slate-500 font-light leading-relaxed">
-            SafeMind Lab is a personal engineering initiative for building and validating governed enterprise AI systems. The focus is practical: improve enterprise workflows with agents where they help, keep deterministic software where it is stronger, and make the full system measurable and safe.
+            SafeMind Lab is an engineering initiative for building and validating governed enterprise AI systems. The focus is practical: improve enterprise workflows with agents where they help, keep deterministic software where it is stronger, and make the full system measurable and safe.
           </p>
         </div>
       </section>
@@ -21,7 +21,7 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-24">
           <div className="md:col-span-2 space-y-8 text-lg text-slate-500 leading-relaxed font-light">
             <p>
-              I approach enterprise AI as a software engineering problem with research questions attached. LLMs are useful reasoning engines, but they need runtime infrastructure around them: identity, policy, state, context, evaluation, observability, and human review.
+              SafeMind Lab approaches enterprise AI as a software engineering problem with research questions attached. LLMs are useful reasoning engines, but they need runtime infrastructure around them: identity, policy, state, context, evaluation, observability, and human review.
             </p>
             <p>
               SafeMind Lab focuses on the hard middle layer between a demo and a trusted workflow. That means building harnesses, testing them against real investigation workloads, and learning where agentic behavior should be introduced or constrained.
@@ -52,7 +52,7 @@ export default function About() {
         <section className="p-12 rounded-3xl bg-slate-900 text-white shadow-2xl text-center">
           <h2 className="text-2xl font-bold mb-4 tracking-tight">Building from systems, not slogans.</h2>
           <p className="text-slate-300 mb-10 font-light leading-relaxed max-w-lg mx-auto">
-            I am open to discussions with teams working on enterprise AI architecture, agent runtime infrastructure, product security, and workflow automation.
+            SafeMind Lab is open to discussions with teams working on enterprise AI architecture, agent runtime infrastructure, product security, and workflow automation.
           </p>
           <a href="/contact" className="inline-flex px-10 py-4 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-100 transition-all">
             Let's Talk
