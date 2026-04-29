@@ -3,86 +3,78 @@ import type { BlogPost } from './blog';
 export const blog1: BlogPost = {
   slug: 'enterprise-ai-is-a-systems-problem',
   title: 'Enterprise AI Is Not a Model Problem — It’s a Systems Problem',
-  excerpt: 'Why production AI agents need orchestration, state, policy, evaluation, memory, and feedback loops — not just better prompts.',
+  excerpt: 'Why production AI agents require orchestration, state, policy, evaluation, memory, and feedback loops — not just better prompts or larger models.',
   date: '2026-04-29',
   readTime: '11 min read',
   category: 'Enterprise AI',
   content: `# Enterprise AI Is Not a Model Problem — It’s a Systems Problem
 
-There’s a moment every team hits.
+There is a predictable pattern in how teams adopt LLMs.
 
-The demo works.
+First, the demo works.
 
-The model feels intelligent.
+Then the system is exposed to real-world conditions.
 
-And then you try to ship it.
+Behavior becomes inconsistent. Costs rise. Outputs become harder to explain.
 
-> LLMs don’t fail in isolation. Systems do.
+> LLMs do not fail in isolation. Systems do.
 
-## The illusion breaks
+## The illusion of model-centric design
 
-At first, nothing obviously fails.
+Most systems start with models and prompts.
 
-But small cracks appear:
+But production systems must handle:
 
-- inconsistent outputs
-- unclear reasoning
-- rising costs
-- lack of trust
+- noisy inputs
+- multi-step reasoning
+- system failures
+- strict constraints
 
-These are not model failures.
+These are systems problems.
 
-They are system failures.
+## SOC triage as an example
 
-## The real problem
+Alerts arrive from multiple systems, often duplicated and incomplete.
 
-Enterprise AI is not about generating answers.
+A simple pipeline fails because it lacks structure.
 
-It is about making decisions under constraints:
-
-- correctness
-- bounded execution
-- auditability
-- safety
-
-That is a systems problem.
-
-## From prompts to processes
-
-The real shift is subtle:
+## The transition
 
 > from calling a model
-> to running a process
+> to executing a process
 
-That process must have structure.
+## Deterministic preprocessing
 
-## State changes everything
+Normalize, deduplicate, and structure data before using AI.
 
-A stateless agent forgets.
+## Stateful execution
 
-A system remembers.
+Track evidence, progress, and uncertainty across steps.
 
-- what happened
-- what was tried
-- what is missing
+## Reasoning vs decision
 
-State turns interaction into investigation.
+Models propose. Systems decide.
 
-## Reasoning is not decision
+## Bounded execution
 
-A model proposes.
+Limit time, cost, and steps.
 
-A system decides.
+## Policy enforcement
 
-That separation is what creates trust.
+Externalize safety and approval logic.
+
+## Memory system
+
+Combine operational, semantic, and knowledge memory.
+
+## Evaluation
+
+Continuously measure and improve.
 
 ## Final thought
 
-Enterprise AI is not limited by models.
+Enterprise AI is constrained by architecture.
 
-It is limited by architecture.
-
-> Agents are not features.
-> They are systems.
+> Agents are systems.
 `
 };
