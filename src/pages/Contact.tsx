@@ -33,8 +33,8 @@ export default function Contact() {
               icon={<Github size={20} />}
               title="GitHub"
               text="Review the harness"
-              link="https://github.com/safemind-lab"
-              subtext="safemind-lab"
+              link="https://github.com/weifengcao/safemind-lab"
+              subtext="weifengcao/safemind-lab"
             />
             <ContactLink 
               icon={<Globe size={20} />}
@@ -56,7 +56,7 @@ export default function Contact() {
               <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
               </div>
-              <span><strong>Advisory:</strong> Designing production-grade agentic infrastructure.</span>
+              <span><strong>Advisory:</strong> Designing governed agentic infrastructure.</span>
             </li>
             <li className="flex items-start">
               <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center mr-4 mt-1 flex-shrink-0">

@@ -225,7 +225,7 @@ export default function Home() {
               <Link to="/contact" className="px-10 py-4 bg-white text-slate-900 font-bold rounded-lg hover:bg-slate-100 transition-colors">
                 Contact
               </Link>
-              <a href="https://github.com/safemind-lab" className="px-10 py-4 bg-slate-800 border border-slate-700 rounded-lg flex items-center font-bold hover:bg-slate-700 transition-colors">
+              <a href="https://github.com/weifengcao/safemind-lab" className="px-10 py-4 bg-slate-800 border border-slate-700 rounded-lg flex items-center font-bold hover:bg-slate-700 transition-colors">
                 <Github size={18} className="mr-2" /> GitHub
               </a>
             </div>

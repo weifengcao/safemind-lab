@@ -54,7 +54,7 @@ export default function Layout() {
                 </Link>
               ))}
               <a 
-                href="https://github.com/safemind-lab" 
+                href="https://github.com/weifengcao/safemind-lab" 
                 target="_blank" 
                 rel="noreferrer" 
                 className="text-slate-400 hover:text-slate-900 transition-colors"
@@ -100,7 +100,7 @@ export default function Layout() {
                   </Link>
                 ))}
                 <a 
-                  href="https://github.com/safemind-lab" 
+                  href="https://github.com/weifengcao/safemind-lab" 
                   target="_blank" 
                   rel="noreferrer" 
                   className="flex items-center px-3 py-4 text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900"

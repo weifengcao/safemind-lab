@@ -24,7 +24,7 @@ export default function About() {
               SafeMind Lab approaches enterprise AI as a software engineering problem with research questions attached. LLMs are useful reasoning engines, but they need runtime infrastructure around them: identity, policy, state, context, evaluation, observability, and human review.
             </p>
             <p>
-              SafeMind Lab focuses on the hard middle layer between a demo and a trusted workflow. That means building harnesses, testing them against real investigation workloads, and learning where agentic behavior should be introduced or constrained.
+              SafeMind Lab focuses on the hard middle layer between a demo and a trusted workflow. That means building harnesses, testing them against realistic investigation workloads, and learning where agentic behavior should be introduced or constrained.
             </p>
             <p>
               The current work centers on <strong>SafeMind Harness</strong>, a modular control plane for governed agent execution, and field workloads such as SOC triage and compliance review. These projects are not meant to be final products yet; they are concrete systems for validating architecture, safety, and workflow design.
@@ -43,7 +43,7 @@ export default function About() {
             </div>
 
             <div className="flex justify-center md:justify-start gap-4 p-4">
-              <a href="https://github.com/safemind-lab" className="p-3 rounded-full bg-slate-50 border border-slate-100 text-slate-400 hover:text-blue-600 transition-colors shadow-sm"><Github size={18} /></a>
+              <a href="https://github.com/weifengcao/safemind-lab" className="p-3 rounded-full bg-slate-50 border border-slate-100 text-slate-400 hover:text-blue-600 transition-colors shadow-sm"><Github size={18} /></a>
               <a href="mailto:contact@safemindlab.com" className="p-3 rounded-full bg-slate-50 border border-slate-100 text-slate-400 hover:text-blue-600 transition-colors shadow-sm"><Mail size={18} /></a>
             </div>
           </div>

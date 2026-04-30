@@ -1,23 +1,27 @@
-export interface BlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
-  category: string;
-  content: string;
-}
+# SafeMind Lab Substack Blog Series
 
-export const blogPosts: BlogPost[] = [
-  {
-    slug: 'beyond-the-chatbot-governance-crisis-enterprise-ai',
-    title: 'Beyond the Chatbot: The Governance Crisis in Enterprise AI',
-    excerpt: 'Why enterprise AI needs managed runtime infrastructure before agents can safely act inside real workflows.',
-    date: '2026-04-29',
-    readTime: '8 min read',
-    category: 'Governance',
-    content: `
-# Beyond the Chatbot: The Governance Crisis in Enterprise AI
+This file contains publication-ready drafts for the SafeMind Lab blog series. The positioning is intentionally conservative: it reflects the current investigation harness implementation, avoids unverified performance claims, and distinguishes implemented scaffolding from future production hardening.
+
+Suggested publishing order:
+
+1. Beyond the Chatbot: The Governance Crisis in Enterprise AI
+2. Designing a Governed Investigation Harness
+3. Inside the SOC Triage Agent Domain Pack
+4. Measurable Autonomy Without Fake Metrics
+5. Context Engineering vs. Harness Engineering
+6. What Breaks First in Agentic Systems
+7. Policy and Auditability in AI Workflows
+
+Image assets to upload manually to Substack:
+
+- `public/images/safemind_lab_hero.png`
+- `public/images/dashboard_mockup.png`
+
+---
+
+# 1. Beyond the Chatbot: The Governance Crisis in Enterprise AI
+
+Subtitle: Why enterprise AI needs managed runtime infrastructure before agents can safely act inside real workflows.
 
 Most enterprise AI programs have already learned the easy lesson: language models are useful interfaces. They can summarize, classify, draft, search, explain, and assist. The harder lesson begins when the system is asked to act.
 
@@ -66,25 +70,20 @@ This approach does not make agents risk-free. It makes their behavior inspectabl
 The standard for enterprise agents should not be whether they can produce impressive answers. It should be whether they can operate inside a system that survives failure, supports review, and preserves accountability.
 
 The path forward is not raw autonomy. It is bounded autonomy: agents that reason inside explicit contracts, act through governed gateways, and improve through measured feedback.
-`,
-  },
-  {
-    slug: 'designing-governed-investigation-harness',
-    title: 'Designing a Governed Investigation Harness',
-    excerpt: 'A practical architecture for separating agent reasoning from state, policy, memory, and tool execution.',
-    date: '2026-04-29',
-    readTime: '10 min read',
-    category: 'Architecture',
-    content: `
-# Designing a Governed Investigation Harness
+
+---
+
+# 2. Designing a Governed Investigation Harness
+
+Subtitle: A practical architecture for separating agent reasoning from state, policy, memory, and tool execution.
+
+Suggested image: upload `safemind_lab_hero.png` after the introduction.
 
 The central design choice in SafeMind Lab is the separation of reasoning from execution.
 
 Reasoning is exploratory. It benefits from flexible models, domain context, and iterative planning. Execution is different. It needs strict interfaces, scoped credentials, retries, audit records, and predictable failure behavior.
 
 The investigation harness is designed around that split.
-
-![SafeMind Lab architecture concept](/images/safemind_lab_hero.png)
 
 ## The Control Plane
 
@@ -129,23 +128,18 @@ The goal is not to make the model disappear. The goal is to put the model in the
 Models are strong at interpretation, synthesis, and proposal generation. They are weak as sole authorities over state, policy, credentials, and irreversible actions. A governed harness gives the model room to reason while keeping operational authority in deterministic services.
 
 That is the architectural line SafeMind Lab is exploring.
-`,
-  },
-  {
-    slug: 'soc-triage-agent-domain-pack',
-    title: 'Inside the SOC Triage Agent Domain Pack',
-    excerpt: 'How canonical alerts, deterministic playbooks, evidence tables, and governed response actions fit into the investigation harness.',
-    date: '2026-04-29',
-    readTime: '10 min read',
-    category: 'SOC',
-    content: `
-# Inside the SOC Triage Agent Domain Pack
+
+---
+
+# 3. Inside the SOC Triage Agent Domain Pack
+
+Subtitle: How canonical alerts, deterministic playbooks, evidence tables, and governed response actions fit into the investigation harness.
+
+Suggested image: upload `dashboard_mockup.png` after the opening section.
 
 SOC triage is a useful proving ground for governed agents because the work is repetitive, evidence-heavy, time-sensitive, and risky when handled carelessly.
 
 Analysts need speed, but they also need defensible conclusions. An agent can help only if it preserves evidence, respects authority boundaries, and escalates uncertainty instead of hiding it.
-
-![SOC command console mockup](/images/dashboard_mockup.png)
 
 ## The Alert Treadmill
 
@@ -194,17 +188,12 @@ The desired output of SOC triage is not a clever paragraph. It is a reviewable c
 That is why the SOC Triage Agent is implemented as a domain pack on top of the harness instead of a standalone chatbot. The harness provides state, policy, replay, evaluation, and execution boundaries. The SOC pack provides security-specific structure.
 
 The combination is the product idea: guided autonomy for investigation work, with deterministic control over action.
-`,
-  },
-  {
-    slug: 'measurable-autonomy-without-fake-metrics',
-    title: 'Measurable Autonomy Without Fake Metrics',
-    excerpt: 'How to evaluate agentic workflows through evidence quality, safety, replay, and rollout controls instead of inflated benchmark claims.',
-    date: '2026-04-29',
-    readTime: '9 min read',
-    category: 'Evaluation',
-    content: `
-# Measurable Autonomy Without Fake Metrics
+
+---
+
+# 4. Measurable Autonomy Without Fake Metrics
+
+Subtitle: How to evaluate agentic workflows through evidence quality, safety, replay, and rollout controls instead of inflated benchmark claims.
 
 It is tempting to market agents with dramatic numbers: percent faster, percent cheaper, percent more accurate. Sometimes those numbers are real. Often they are benchmark theater.
 
@@ -251,17 +240,12 @@ The standard for measurable autonomy should be evidence-backed behavior over tim
 Can the system show what it knew? Can it show what it did? Can it explain what it refused to do? Can it replay the workflow? Can it block closure when evidence is insufficient? Can it separate recommendation from permission?
 
 Those questions matter more than a single benchmark number.
-`,
-  },
-  {
-    slug: 'context-engineering-vs-harness-engineering',
-    title: 'Context Engineering vs. Harness Engineering',
-    excerpt: 'Why production agents need durable state, scoped memory, deterministic gates, and execution boundaries more than bigger prompts.',
-    date: '2026-04-29',
-    readTime: '8 min read',
-    category: 'Architecture',
-    content: `
-# Context Engineering vs. Harness Engineering
+
+---
+
+# 5. Context Engineering vs. Harness Engineering
+
+Subtitle: Why production agents need durable state, scoped memory, deterministic gates, and execution boundaries more than bigger prompts.
 
 Context engineering is useful. Harness engineering is necessary.
 
@@ -304,17 +288,12 @@ Context engineering asks, what should the model know?
 Harness engineering asks, what should the system allow, record, recover, evaluate, and explain?
 
 Both questions matter. But only the second one turns a capable model into a governed workflow component.
-`,
-  },
-  {
-    slug: 'what-breaks-first-in-agentic-systems',
-    title: 'What Breaks First in Agentic Systems',
-    excerpt: 'The common failure modes that appear when agents move from demos into stateful, tool-using enterprise workflows.',
-    date: '2026-04-29',
-    readTime: '9 min read',
-    category: 'Production',
-    content: `
-# What Breaks First in Agentic Systems
+
+---
+
+# 6. What Breaks First in Agentic Systems
+
+Subtitle: The common failure modes that appear when agents move from demos into stateful, tool-using enterprise workflows.
 
 When agentic systems fail, the model is not always the first thing that breaks.
 
@@ -359,17 +338,12 @@ SafeMind addresses this with closure readiness, policy gates, rollout modes, and
 Agent reliability is not a single model property. It is an architecture property.
 
 The model matters, but the harness determines whether failures are bounded, visible, and recoverable.
-`,
-  },
-  {
-    slug: 'policy-and-auditability-in-ai-workflows',
-    title: 'Policy and Auditability in AI Workflows',
-    excerpt: 'How to design agent workflows that security, compliance, operations, and legal teams can actually review.',
-    date: '2026-04-29',
-    readTime: '9 min read',
-    category: 'Governance',
-    content: `
-# Policy and Auditability in AI Workflows
+
+---
+
+# 7. Policy and Auditability in AI Workflows
+
+Subtitle: How to design agent workflows that security, compliance, operations, and legal teams can actually review.
 
 Enterprise AI adoption is often framed as a model-quality problem. In regulated or security-sensitive environments, the adoption blocker is just as often auditability.
 
@@ -416,10 +390,3 @@ That matters because agent behavior changes over time. Governance should cover n
 The goal is not to slow every workflow down. The goal is to make high-impact automation reviewable enough to trust.
 
 When auditability is designed into the runtime, teams can move faster with clearer boundaries. The agent can assist, the system can enforce, and humans can review the parts that matter.
-`,
-  },
-];
-
-export function getBlogPost(slug: string | undefined) {
-  return blogPosts.find((post) => post.slug === slug);
-}
