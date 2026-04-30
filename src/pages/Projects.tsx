@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ChevronRight, Cpu, ShieldCheck } from 'lucide-react';
+import { ChevronRight, Cpu, KeyRound, ShieldCheck } from 'lucide-react';
 import SEO from '../components/SEO';
 import { projectSummaries } from '../content/projects';
 
@@ -14,7 +14,7 @@ export default function Projects() {
         <div className="max-w-4xl mx-auto px-4">
           <h1 className="text-4xl font-extrabold mb-6 text-slate-900 tracking-tight">Field Workloads</h1>
           <p className="text-xl text-slate-500 font-light leading-relaxed">
-            Applied systems used to test the harness against realistic enterprise workflows: messy inputs, incomplete evidence, policy constraints, and review requirements.
+            Applied systems from the implementation used to test the harness against realistic enterprise workflows: messy inputs, incomplete evidence, policy constraints, governed execution, replay, and tenant rollout requirements.
           </p>
         </div>
       </section>
@@ -32,6 +32,8 @@ export default function Projects() {
                   <div className="p-6 rounded-xl bg-white shadow-sm border border-slate-100 group-hover:scale-110 transition-transform duration-500">
                     {project.accent === 'blue' ? (
                       <ShieldCheck size={32} className="text-blue-600" />
+                    ) : project.accent === 'emerald' ? (
+                      <KeyRound size={32} className="text-emerald-600" />
                     ) : (
                       <Cpu size={32} className="text-indigo-600" />
                     )}
