@@ -1,4 +1,4 @@
-import { ArrowLeft, Landmark, FileText, CheckCircle, BarChart3, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Landmark, FileText, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 
@@ -7,7 +7,7 @@ export default function ProjectFintech() {
     <div className="pb-24">
       <SEO 
         title="Fintech Compliance Agent Case Study" 
-        description="Applying the SafeMind Harness to the rigors of financial regulation. This project demonstrates how our structured investigation state adapts to policy-heavy audit workloads."
+        description="Applying the SafeMind Harness to the rigors of financial regulation. This project demonstrates how the structured investigation state adapts to policy-heavy audit workloads."
       />
       <div className="max-w-4xl mx-auto px-4 mt-12 mb-8">
         <Link to="/projects" className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-blue-600 transition-colors">
@@ -30,7 +30,7 @@ export default function ProjectFintech() {
             <div className="p-10 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
                 <Landmark className="text-blue-600 mb-6" size={32} />
                 <h3 className="text-lg font-bold mb-3 text-slate-900 uppercase">Regulatory Audits</h3>
-                <p className="text-slate-500 text-sm font-light leading-relaxed">Automated mapping of transaction logs to specific AML and KYC policies.</p>
+                <p className="text-slate-500 text-sm font-light leading-relaxed">Structured mapping of transaction logs to specific AML and KYC policies.</p>
             </div>
             <div className="p-10 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
                 <FileText className="text-indigo-600 mb-6" size={32} />

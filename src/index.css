@@ -36,3 +36,15 @@
 .markdown-body a {
   @apply text-accent-cyan hover:underline;
 }
+
+.markdown-body img {
+  @apply my-8 w-full rounded-2xl border border-slate-100 shadow-sm;
+}
+
+.markdown-body ul {
+  @apply my-4 list-disc pl-6;
+}
+
+.markdown-body li {
+  @apply mb-2;
+}

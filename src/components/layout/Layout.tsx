@@ -1,20 +1,24 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Menu, X, Github, ChevronRight } from 'lucide-react';
+import { Menu, X, Github } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/src/lib/utils';
 
+const navLinks = [
+  { name: 'Harness', path: '/platform' },
+  { name: 'Workloads', path: '/projects' },
+  { name: 'Blog', path: '/blog' },
+  { name: 'About', path: '/about' },
+  { name: 'Contact', path: '/contact' },
+];
+
+function isActivePath(pathname: string, path: string) {
+  return pathname === path || pathname.startsWith(`${path}/`);
+}
+
 export default function Layout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-
-  const navLinks = [
-    { name: 'Harness', path: '/platform' },
-    { name: 'Workloads', path: '/projects' },
-    { name: 'Blog', path: '/blog' },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
-  ];
 
   // Close menu on route change
   useEffect(() => {
@@ -43,14 +47,14 @@ export default function Layout() {
                   to={link.path}
                    className={cn(
                     "text-xs font-bold uppercase tracking-widest transition-colors hover:text-blue-600",
-                    location.pathname === link.path ? "text-blue-600" : "text-slate-500"
+                    isActivePath(location.pathname, link.path) ? "text-blue-600" : "text-slate-500"
                   )}
                 >
                   {link.name}
                 </Link>
               ))}
               <a 
-                href="https://github.com/safemind-lab" 
+                href="https://github.com/weifengcao/safemind-lab" 
                 target="_blank" 
                 rel="noreferrer" 
                 className="text-slate-400 hover:text-slate-900 transition-colors"
@@ -89,14 +93,14 @@ export default function Layout() {
                     to={link.path}
                     className={cn(
                       "block px-3 py-4 text-sm font-bold uppercase tracking-widest rounded-md",
-                      location.pathname === link.path ? "bg-slate-50 text-blue-600" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                      isActivePath(location.pathname, link.path) ? "bg-slate-50 text-blue-600" : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
                     )}
                   >
                     {link.name}
                   </Link>
                 ))}
                 <a 
-                  href="https://github.com/safemind-lab" 
+                  href="https://github.com/weifengcao/safemind-lab" 
                   target="_blank" 
                   rel="noreferrer" 
                   className="flex items-center px-3 py-4 text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900"

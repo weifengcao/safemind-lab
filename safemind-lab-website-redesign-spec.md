@@ -8,12 +8,12 @@ Stack: React (frontend) + Node.js/Express (backend)
 
 ## 1. Product Goal
 
-SafeMind Lab is a personal engineering hub for showcasing:
+SafeMind Lab is an engineering hub for showcasing:
 - the SafeMind Harness platform
 - selected projects built on top of it
 - technical writing and design principles
 - GitHub proof of work
-- personal profile and contact paths
+- profile and contact paths
 
 This site should feel like a **serious AI systems engineer portfolio**, not a startup marketing site and not a general blog.
 
@@ -114,7 +114,7 @@ Suggested headline:
 **Building production-grade agent systems with a focus on orchestration, context, and reliability.**
 
 Suggested subheadline:
-**SafeMind Lab is my personal engineering hub for designing agent harnesses and validating them through real-world investigation workloads such as SOC and compliance.**
+**SafeMind Lab is an engineering hub for designing agent harnesses and validating them through real-world investigation workloads such as SOC and compliance.**
 
 Hero CTAs:
 - Explore Platform
@@ -144,10 +144,11 @@ Each card contains:
 - CTA to project detail page
 
 #### E. Blog / Design Principles Preview
-3 featured posts:
-- Context Engineering vs Harness Engineering
-- What Breaks First in Agentic Systems
-- Policy and Auditability in AI Workflows
+Featured series: **Operationalizing Enterprise AI**
+1. Beyond the Chatbot: The Governance Crisis in Enterprise AI
+2. Designing a Governed Multi-Agent System: The Harness/Domain Pack Pattern
+3. Measurable Autonomy: Experiments in Automated SOC Triage
+4. Managed Agent Lifecycles: The Future of Safe AI
 
 #### F. About Preview
 Short bio, one paragraph only.
@@ -642,7 +643,7 @@ This site is about SafeMind Lab only.
 
 Use this across the site:
 
-**SafeMind Lab is a personal engineering hub for designing production-grade agent systems with a focus on orchestration, context, and reliability.**
+**SafeMind Lab is an engineering hub for designing production-grade agent systems with a focus on orchestration, context, and reliability.**
 
 ---
 

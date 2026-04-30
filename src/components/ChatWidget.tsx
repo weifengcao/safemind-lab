@@ -10,12 +10,17 @@ interface Message {
   timestamp: Date;
 }
 
-export default function ChatWidget() {
-  const [isOpen, setIsOpen] = useState(false);
+interface ChatWidgetProps {
+  isOpen?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
+}
+
+export default function ChatWidget({ isOpen: controlledIsOpen, onOpenChange }: ChatWidgetProps) {
+  const [uncontrolledIsOpen, setUncontrolledIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Hello! Welcome to SafeMind Lab. How can we help you today?',
+      text: 'Use this helper to draft the topic you want to discuss with SafeMind Lab.',
       sender: 'agent',
       timestamp: new Date()
     }
@@ -23,12 +28,30 @@ export default function ChatWidget() {
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const responseTimeoutRef = useRef<number | undefined>(undefined);
+  const isOpen = controlledIsOpen ?? uncontrolledIsOpen;
+
+  const setIsOpen = (nextIsOpen: boolean) => {
+    onOpenChange?.(nextIsOpen);
+
+    if (controlledIsOpen === undefined) {
+      setUncontrolledIsOpen(nextIsOpen);
+    }
+  };
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages, isTyping]);
+
+  useEffect(() => {
+    return () => {
+      if (responseTimeoutRef.current !== undefined) {
+        window.clearTimeout(responseTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleSend = () => {
     if (!inputValue.trim()) return;
@@ -45,11 +68,11 @@ export default function ChatWidget() {
     
     // Simulate typing and response
     setIsTyping(true);
-    setTimeout(() => {
+    responseTimeoutRef.current = window.setTimeout(() => {
       setIsTyping(false);
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
-        text: "Thanks for reaching out! A member of the SafeMind engineering team will be notified. We typically respond within 2-4 business hours.",
+        text: "This helper does not send messages yet. For a real follow-up, email contact@safemindlab.com with the context you just drafted.",
         sender: 'agent',
         timestamp: new Date()
       };
@@ -74,10 +97,10 @@ export default function ChatWidget() {
                   <User size={16} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold">SafeMind Support</h4>
+                  <h4 className="text-sm font-bold">SafeMind Message Helper</h4>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
-                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Online</span>
+                    <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Drafting</span>
                   </div>
                 </div>
               </div>
@@ -132,7 +155,7 @@ export default function ChatWidget() {
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Type a message..."
                   className="flex-grow text-sm bg-slate-100 border-none rounded-full px-4 py-2 focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-slate-900 outline-none"
                 />
