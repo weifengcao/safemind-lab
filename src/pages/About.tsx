@@ -27,7 +27,7 @@ export default function About() {
               SafeMind Lab focuses on the hard middle layer between a demo and a trusted workflow. That means building harnesses, testing them against realistic investigation workloads, and learning where agentic behavior should be introduced or constrained.
             </p>
             <p>
-              The current work centers on <strong>SafeMind Harness</strong>, a modular control plane for governed agent execution, and field workloads such as SOC triage and compliance review. These projects are not meant to be final products yet; they are concrete systems for validating architecture, safety, and workflow design.
+              The current work centers on <strong>SafeMind Harness</strong>, a modular control plane for governed agent execution, and field workloads such as compliance review. These projects are not meant to be final products yet; they are concrete systems for validating architecture, safety, and workflow design.
             </p>
           </div>
 

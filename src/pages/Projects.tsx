@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ChevronRight, Cpu, KeyRound, ShieldCheck } from 'lucide-react';
+import { ChevronRight, Cpu, ShieldCheck } from 'lucide-react';
 import SEO from '../components/SEO';
 import { projectSummaries } from '../content/projects';
 
@@ -32,8 +32,6 @@ export default function Projects() {
                   <div className="p-6 rounded-xl bg-white shadow-sm border border-slate-100 group-hover:scale-110 transition-transform duration-500">
                     {project.accent === 'blue' ? (
                       <ShieldCheck size={32} className="text-blue-600" />
-                    ) : project.accent === 'emerald' ? (
-                      <KeyRound size={32} className="text-emerald-600" />
                     ) : (
                       <Cpu size={32} className="text-indigo-600" />
                     )}

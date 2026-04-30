@@ -49,7 +49,7 @@ SafeMind Lab focuses on the infrastructure around the model. The current impleme
 
 The harness separates LLM reasoning from authority. The model can propose plans and interpret evidence, but deterministic services own state, policy checks, tool execution, approvals, replay, and rollout controls.
 
-The implementation is organized around a Python control plane, a Go execution data plane, protobuf contracts, durable workflow state, scoped memory, policy guardrails, and domain packs for SOC triage and AI security.
+The implementation is organized around a Python control plane, a Go execution data plane, protobuf contracts, durable workflow state, scoped memory, policy guardrails, and sample investigation workloads.
 
 This is not positioned as a finished enterprise platform. It is a concrete engineering scaffold for studying the boundary between useful autonomy and controlled execution.
 
@@ -112,15 +112,13 @@ Memory is treated as scoped and trust-separated. The implementation includes sco
 
 That design choice is important: context is useful, but context is also an attack surface.
 
-## Domain Packs
+## Workload Modules
 
-The harness is domain-agnostic. Domain packs provide workload-specific intelligence.
+The harness is domain-agnostic. Workload modules provide domain-specific intelligence.
 
-The SOC domain pack adds canonical alert ingest, alert-family classification, deterministic playbook selection, shared-key correlation, evidence tables, verdicting, and response guidance.
+Sample workload modules add domain intelligence: ingest normalization, classification, deterministic playbook selection, shared-key correlation, evidence tables, and response guidance.
 
-The AI Security domain pack adds risk detection, forensic playbooks, active containment patterns, and command-center monitoring for enterprise AI execution telemetry.
-
-The value of this pattern is that the core harness does not need to hard-code every domain. It provides the governance substrate. Domain packs provide deterministic workload knowledge.
+The value of this pattern is that the core harness does not need to hard-code every domain. It provides the governance substrate. Workload modules provide deterministic domain knowledge.
 
 ## Why This Architecture Matters
 
@@ -129,71 +127,6 @@ The goal is not to make the model disappear. The goal is to put the model in the
 Models are strong at interpretation, synthesis, and proposal generation. They are weak as sole authorities over state, policy, credentials, and irreversible actions. A governed harness gives the model room to reason while keeping operational authority in deterministic services.
 
 That is the architectural line SafeMind Lab is exploring.
-`,
-  },
-  {
-    slug: 'soc-triage-agent-domain-pack',
-    title: 'Inside the SOC Triage Agent Domain Pack',
-    excerpt: 'How canonical alerts, deterministic playbooks, evidence tables, and governed response actions fit into the investigation harness.',
-    date: '2026-04-29',
-    readTime: '10 min read',
-    category: 'SOC',
-    content: `
-# Inside the SOC Triage Agent Domain Pack
-
-SOC triage is a useful proving ground for governed agents because the work is repetitive, evidence-heavy, time-sensitive, and risky when handled carelessly.
-
-Analysts need speed, but they also need defensible conclusions. An agent can help only if it preserves evidence, respects authority boundaries, and escalates uncertainty instead of hiding it.
-
-![SOC command console mockup](/images/dashboard_mockup.png)
-
-## The Alert Treadmill
-
-Security teams often face too many alerts with too little context. A raw endpoint, identity, cloud, or email alert rarely contains enough information to make a final decision. Analysts must gather supporting evidence, correlate entities, understand historical context, and decide whether response is warranted.
-
-Classic automation helps when the path is predictable. It struggles when the investigation requires judgment. Pure agentic automation has the opposite problem: it can reason flexibly, but without strong boundaries it can overreach.
-
-The SOC domain pack is designed to combine deterministic security workflow logic with a governed investigation harness.
-
-## Canonical Alert Ingest
-
-The first step is normalization. Raw vendor events are converted into canonical alert artifacts that can be attached to investigations and cases.
-
-Those artifacts are persisted. They are not just prompt context. They can be included in replay bundles, timeline views, verdicting, and correlation logic.
-
-This gives the system a stable object to reason about and a stable object for humans to inspect.
-
-## Family Classification and Playbook Selection
-
-The SOC pack uses deterministic alert-family classification and typed bundle rules. Current coverage includes phishing, OAuth abuse, cloud IAM, and privileged access scenarios.
-
-The important point is that family matching, playbook bindings, hypothesis templates, and response-action mappings can be externalized behind a configurable domain bundle. New family identifiers can be introduced through typed rules without rewriting the classifier, verdict engine, or response planner.
-
-That keeps domain intelligence explicit and reviewable.
-
-## Evidence and Correlation
-
-The implementation includes shared-key correlation across investigations and cases. Related alerts can be ranked using principal overlap, supporting entities, and persisted alert artifacts.
-
-Evidence is presented through analyst-facing tables and briefs. The goal is not just to produce a final label. The goal is to show what the system used to reach that label and where evidence is still incomplete.
-
-This is where agent assistance becomes useful: not as a black-box verdict, but as a structured evidence assembly workflow.
-
-## Governed Response Guidance
-
-The SOC pack can produce family-aware response recommendations. Those recommendations can be converted into deterministic response-guidance task templates.
-
-The harness still applies governance. Tenant tool availability constrains what can be planned. Policy gates determine whether actions can proceed. High-impact write actions can pause for approval. Failed guided automation can escalate to human review.
-
-That means the system can recommend containment without pretending that recommendation is the same as permission.
-
-## A Better Analyst Handoff
-
-The desired output of SOC triage is not a clever paragraph. It is a reviewable case state: what happened, what evidence supports it, what remains uncertain, what response is recommended, what policy decisions were made, and what approvals are pending.
-
-That is why the SOC Triage Agent is implemented as a domain pack on top of the harness instead of a standalone chatbot. The harness provides state, policy, replay, evaluation, and execution boundaries. The SOC pack provides security-specific structure.
-
-The combination is the product idea: guided autonomy for investigation work, with deterministic control over action.
 `,
   },
   {
