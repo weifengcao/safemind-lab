@@ -1,7 +1,8 @@
 import { motion } from 'motion/react';
-import { ChevronRight, Shield, Cpu, ArrowUpRight, Github, Database, RadioTower } from 'lucide-react';
+import { ChevronRight, Shield, Cpu, ArrowUpRight, Github, Database, RadioTower, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import { blogPosts } from '../content/blog';
 import { projectSummaries } from '../content/projects';
 
 export default function Home() {
@@ -17,6 +18,9 @@ export default function Home() {
     hidden: { opacity: 0, y: 18 },
     visible: { opacity: 1, y: 0 }
   };
+
+  const featuredEssay = blogPosts[0];
+  const secondaryEssays = blogPosts.slice(1, 3);
 
   return (
     <div className="flex flex-col">
@@ -68,6 +72,67 @@ export default function Home() {
               </Link>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Latest Essays */}
+      <section className="py-24 bg-white border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div className="max-w-3xl">
+              <div className="flex items-center gap-2 text-blue-600 text-xs font-bold uppercase tracking-[0.2em] mb-4">
+                <BookOpen size={14} /> Essays
+              </div>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900">Latest Writing</h2>
+              <p className="mt-4 text-lg text-slate-500 font-light leading-relaxed">
+                Long-form notes on governed enterprise AI systems, investigation harness architecture, SOC triage, evaluation, and auditability.
+              </p>
+            </div>
+            <Link to="/blog" className="text-blue-600 hover:text-indigo-600 font-bold text-xs uppercase tracking-widest flex items-center">
+              View all essays <ChevronRight size={14} className="ml-1" />
+            </Link>
+          </div>
+
+          {featuredEssay && (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <Link
+                to={`/blog/${featuredEssay.slug}`}
+                className="lg:col-span-2 p-10 rounded-3xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-lg transition-all group"
+              >
+                <div className="flex flex-wrap gap-3 mb-6">
+                  <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-[10px] font-bold uppercase tracking-widest">Featured</span>
+                  <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold uppercase tracking-widest">{featuredEssay.category}</span>
+                  <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold uppercase tracking-widest">{featuredEssay.readTime}</span>
+                </div>
+                <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-5 group-hover:text-blue-600 transition-colors">
+                  {featuredEssay.title}
+                </h3>
+                <p className="text-lg text-slate-500 font-light leading-relaxed mb-8">
+                  {featuredEssay.excerpt}
+                </p>
+                <div className="text-xs font-bold uppercase tracking-widest flex items-center gap-2 text-slate-900 group-hover:text-blue-600">
+                  Read Essay <ArrowUpRight size={16} />
+                </div>
+              </Link>
+
+              <div className="space-y-6">
+                {secondaryEssays.map((post) => (
+                  <Link
+                    key={post.slug}
+                    to={`/blog/${post.slug}`}
+                    className="block p-7 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm hover:shadow-md transition-all group"
+                  >
+                    <div className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-4">{post.category}</div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{post.title}</h3>
+                    <p className="text-sm text-slate-500 font-light leading-relaxed mb-5">{post.excerpt}</p>
+                    <div className="text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 text-slate-900 group-hover:text-blue-600">
+                      Read <ArrowUpRight size={14} />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
