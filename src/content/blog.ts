@@ -49,7 +49,7 @@ SafeMind Lab focuses on the infrastructure around the model. The current impleme
 
 The harness separates LLM reasoning from authority. The model can propose plans and interpret evidence, but deterministic services own state, policy checks, tool execution, approvals, replay, and rollout controls.
 
-The implementation is organized around a Python control plane, a Go execution data plane, protobuf contracts, durable workflow state, scoped memory, policy guardrails, and domain packs for SOC triage and AI security.
+The implementation is organized around a Python control plane, a Go execution data plane, protobuf contracts, durable workflow state, scoped memory, policy guardrails, and a public SOC triage workload.
 
 This is not positioned as a finished enterprise platform. It is a concrete engineering scaffold for studying the boundary between useful autonomy and controlled execution.
 
@@ -112,15 +112,13 @@ Memory is treated as scoped and trust-separated. The implementation includes sco
 
 That design choice is important: context is useful, but context is also an attack surface.
 
-## Domain Packs
+## Workload Modules
 
-The harness is domain-agnostic. Domain packs provide workload-specific intelligence.
+The harness is domain-agnostic. Workload modules provide domain-specific intelligence.
 
-The SOC domain pack adds canonical alert ingest, alert-family classification, deterministic playbook selection, shared-key correlation, evidence tables, verdicting, and response guidance.
+The SOC workload module adds canonical alert ingest, alert-family classification, deterministic playbook selection, shared-key correlation, evidence tables, verdicting, and response guidance.
 
-The AI Security domain pack adds risk detection, forensic playbooks, active containment patterns, and command-center monitoring for enterprise AI execution telemetry.
-
-The value of this pattern is that the core harness does not need to hard-code every domain. It provides the governance substrate. Domain packs provide deterministic workload knowledge.
+The value of this pattern is that the core harness does not need to hard-code every domain. It provides the governance substrate. Workload modules provide deterministic domain knowledge.
 
 ## Why This Architecture Matters
 
