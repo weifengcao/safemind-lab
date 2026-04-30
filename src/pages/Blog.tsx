@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { ArrowUpRight, Clock, Tag } from 'lucide-react';
 import { motion } from 'motion/react';
 import SEO from '../components/SEO';
@@ -32,7 +31,7 @@ export default function Blog() {
               viewport={{ once: true }}
               className="group"
             >
-              <Link to={`/blog/${post.slug}`} className="block">
+              <a href={post.url} target="_blank" rel="noreferrer" className="block">
                 <div className="flex flex-wrap gap-4 mb-4">
                   <span className="flex items-center text-[10px] font-bold text-blue-600 uppercase tracking-widest">
                     <Tag size={10} className="mr-2" /> {post.category}
@@ -53,7 +52,7 @@ export default function Blog() {
                 <div className="flex items-center text-xs font-bold text-slate-900 uppercase tracking-widest group-hover:text-blue-600 transition-all">
                   Read Essay <ArrowUpRight size={16} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </div>
-              </Link>
+              </a>
             </motion.article>
           ))}
         </div>

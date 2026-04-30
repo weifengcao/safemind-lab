@@ -90,8 +90,10 @@ export default function Home() {
 
           {featuredEssay && (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <Link
-                to={`/blog/${featuredEssay.slug}`}
+              <a
+                href={featuredEssay.url}
+                target="_blank"
+                rel="noreferrer"
                 className="lg:col-span-2 p-10 rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-lg transition-all group"
               >
                 <div className="flex flex-wrap gap-3 mb-6">
@@ -108,13 +110,15 @@ export default function Home() {
                 <div className="text-xs font-bold uppercase tracking-widest flex items-center gap-2 text-slate-900 group-hover:text-blue-600">
                   Read Essay <ArrowUpRight size={16} />
                 </div>
-              </Link>
+              </a>
 
               <div className="space-y-6">
                 {secondaryEssays.map((post) => (
-                  <Link
+                  <a
                     key={post.slug}
-                    to={`/blog/${post.slug}`}
+                    href={post.url}
+                    target="_blank"
+                    rel="noreferrer"
                     className="block p-7 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all group"
                   >
                     <div className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-4">{post.category}</div>
@@ -123,7 +127,7 @@ export default function Home() {
                     <div className="text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 text-slate-900 group-hover:text-blue-600">
                       Read <ArrowUpRight size={14} />
                     </div>
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>

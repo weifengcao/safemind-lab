@@ -1,41 +1,8 @@
 import { motion } from 'motion/react';
 import { Shield, Brain, Layers, Cpu, Lock, Workflow, BarChart3, Database, GitBranch, Eye, ServerCog } from 'lucide-react';
 import SEO from '../components/SEO';
-import Mermaid from '../components/Mermaid';
 
 export default function Platform() {
-  const harnessChart = `
-graph TB
-    subgraph "Control Plane (Python)"
-        A[API Gateway] --> B[Supervisor]
-        B --> C[Reasoning Service]
-        B --> D[Policy Engine]
-        B --> E[Evaluation & Replay]
-        B --> F[State Manager]
-    end
-
-    subgraph "State & Memory"
-        G[(PostgreSQL Workflow State)]
-        H[(Redis Hot State)]
-        I[(Scoped Memory / Vector Context)]
-    end
-
-    subgraph "Data Plane (Go)"
-        J[Tool Gateway] --> K[gRPC Execution]
-        J --> L[SQS Worker]
-        K --> M[Adapters / Connectors]
-    end
-
-    F <--> G
-    B <--> H
-    B <--> I
-    B <== Protobuf / gRPC ==> J
-    M --> N[SIEM / EDR / IAM / SaaS / Cloud]
-
-    style B fill:#2563eb,stroke:#fff,stroke-width:2px,color:#fff
-    style J fill:#0f172a,stroke:#fff,stroke-width:2px,color:#fff
-  `;
-
   const sections = [
     {
       title: 'Reference Architecture',
@@ -122,11 +89,19 @@ graph TB
 
       <section className="py-12 bg-white">
         <div className="max-w-5xl mx-auto px-4">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Harness Architecture</h2>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Harness Architecture</h2>
             <p className="text-slate-500 font-light">Separating reasoning, state, policy, memory, and tool execution.</p>
           </div>
-          <Mermaid chart={harnessChart} />
+          <div className="my-12 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
+            <img
+              src="/diagrams/safemind_harness_architecture.png"
+              alt="SafeMind harness architecture showing the control plane, state and memory layer, data plane, and governed external systems."
+              className="mx-auto h-auto w-full max-w-4xl"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
         </div>
       </section>
 
