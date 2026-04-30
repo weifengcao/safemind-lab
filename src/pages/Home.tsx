@@ -299,15 +299,24 @@ function ProjectCard({ title, desc, tags, link }: { title: string, desc: string,
     <Link to={link} className="group flex flex-col transition-all">
       <div className="aspect-[16/10] bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-center overflow-hidden mb-8 shadow-sm group-hover:border-slate-300 transition-all">
         <div className="w-full h-full bg-gradient-to-tr from-blue-50 to-indigo-50 flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
-          <Cpu size={56} className="text-blue-200" />
+          {title.includes('SOC') ? (
+            <ShieldCheck size={56} className="text-blue-300" />
+          ) : (
+            <Cpu size={56} className="text-indigo-300" />
+          )}
         </div>
       </div>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {tags.map(tag => (
-          <span key={tag} className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest bg-blue-50 text-blue-600 rounded">
-            {tag}
-          </span>
-        ))}
+      <div className="flex justify-between items-center mb-4">
+        <div className="flex flex-wrap gap-2">
+          {tags.map(tag => (
+            <span key={tag} className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest bg-blue-50 text-blue-600 rounded">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest opacity-60">
+          {title.includes('SOC') ? 'Cybersecurity' : 'Financial Services'}
+        </span>
       </div>
       <h3 className="text-2xl font-bold mb-4 text-slate-900 group-hover:text-blue-600 transition-colors">{title}</h3>
       <p className="text-slate-500 font-light leading-relaxed mb-6 line-clamp-2">{desc}</p>
