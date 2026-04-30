@@ -5,7 +5,7 @@ export interface ProjectSummary {
   desc: string;
   tags: string[];
   link: string;
-  accent: 'blue' | 'indigo' | 'emerald';
+  accent: 'blue' | 'indigo';
 }
 
 export const projectSummaries: ProjectSummary[] = [
@@ -17,15 +17,6 @@ export const projectSummaries: ProjectSummary[] = [
     tags: ['SOC', 'Domain Pack'],
     link: '/projects/soc-agent',
     accent: 'blue',
-  },
-  {
-    id: 'ai-security',
-    title: 'AI Security Domain Pack',
-    domain: 'AI Governance',
-    desc: 'Closed-loop governance for enterprise AI execution telemetry, including model-abuse detection, forensic playbooks, active containment, and command-center monitoring.',
-    tags: ['AI Security', 'Command Center'],
-    link: '/platform#ai-security',
-    accent: 'emerald',
   },
   {
     id: 'fintech-compliance',
