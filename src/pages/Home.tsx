@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ChevronRight, Shield, Cpu, GitBranch, ArrowUpRight, Github, BarChart3, Workflow, BookOpen } from 'lucide-react';
+import { ChevronRight, Shield, ShieldCheck, Cpu, GitBranch, ArrowUpRight, Github, BarChart3, Workflow, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { blogPosts } from '../content/blog';
