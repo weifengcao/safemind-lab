@@ -44,7 +44,7 @@ graph TB
         { icon: <Layers size={20} />, title: 'Python Control Plane', text: 'API gateway, supervisor, reasoning boundary, policy engine, evaluation, replay, recovery, and MCP server support.' },
         { icon: <Workflow size={20} />, title: 'Go Data Plane', text: 'Governed tool gateway, gRPC execution, SQS worker path, adapter interfaces, and write-action ledger linkage.' },
         { icon: <Database size={20} />, title: 'State & Memory', text: 'Durable investigations, plans, tasks, evidence, approvals, checkpoints, scoped memory, and retention controls.' },
-        { icon: <Eye size={20} />, title: 'Domain Packs', text: 'Portable deterministic intelligence for SOC triage and future governed workloads without baking domain logic into the core harness.' }
+        { icon: <Eye size={20} />, title: 'Domain Packs', text: 'Portable deterministic intelligence for complex investigations and future governed workloads without baking domain logic into the core harness.' }
       ]
     },
     {
@@ -66,15 +66,20 @@ graph TB
         { icon: <Lock size={20} />, title: 'Release Approvals', text: 'Model, prompt, policy, tool, schema, domain, and rollout changes have approval records and change history.' },
         { icon: <Workflow size={20} />, title: 'Rollback Runbooks', text: 'Release, rollback, and cutover procedures are documented and represented in the governance model.' }
       ]
+    },
+    {
+      title: 'SaaS–AaaS Adaptation',
+      desc: 'A key research track is how traditional SaaS workflows can be incrementally upgraded with agentic components without replacing the entire system.',
+      features: [
+        { icon: <GitBranch size={20} />, title: 'Workflow Decomposition', text: 'Separate deterministic steps, judgment-heavy steps, human approval points, and tool-mediated actions.' },
+        { icon: <BarChart3 size={20} />, title: 'Quantitative Tradeoffs', text: 'Measure where agents improve throughput or decision quality, and where SaaS-style deterministic logic remains better.' },
+        { icon: <Workflow size={20} />, title: 'Incremental Adoption', text: 'Existing workflows can start with agent-assisted review, then gradually move toward bounded autonomous execution.' },
+        { icon: <Cpu size={20} />, title: 'Versioned Proposals', text: 'Supervisor agents can propose architecture changes, but rollout happens through versioning and human-in-the-loop review.' }
+      ]
     }
   ];
 
-  const domainPacks = [
-    {
-      title: 'SOC Triage',
-      text: 'Canonical alert ingest, alert-family classification, shared-key correlation, evidence tables, deterministic verdicting, and response-guidance task templates.',
-    },
-  ];
+
 
   return (
     <div className="pb-24">
@@ -120,30 +125,7 @@ graph TB
         </div>
       </section>
 
-      <section className="py-20 bg-slate-50 border-y border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
-          <div>
-            <div className="inline-flex px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold uppercase tracking-[0.2em] mb-5">
-              Implemented Domain Pack
-            </div>
-            <h2 className="text-3xl font-bold mb-5 text-slate-900 tracking-tight">Portable Workload Intelligence</h2>
-            <p className="text-lg text-slate-500 font-light leading-relaxed">
-              Domain packs keep workload-specific logic outside the core harness while preserving deterministic behavior, typed bundle rules, and governed response execution.
-            </p>
-          </div>
-          <div className="lg:col-span-2 grid grid-cols-1 gap-6">
-            {domainPacks.map((pack) => (
-              <div key={pack.title} className="p-8 rounded-2xl bg-white border border-slate-100 shadow-sm">
-                <div className="w-10 h-10 rounded-lg bg-slate-900 text-white flex items-center justify-center mb-6">
-                  <ServerCog size={20} />
-                </div>
-                <h3 className="text-lg font-bold mb-3 text-slate-900">{pack.title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed font-light">{pack.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 space-y-32">
         {sections.map((section, idx) => (

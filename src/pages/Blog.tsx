@@ -9,7 +9,7 @@ export default function Blog() {
     <div className="pb-24">
       <SEO
         title="Essays"
-        description="Long-form writing on enterprise AI systems, governed agent architecture, SOC triage, evaluation, and auditability."
+        description="Long-form writing on enterprise AI systems, governed agent architecture, evaluation, and auditability."
       />
 
       <section className="pt-24 pb-20 border-b border-slate-100 bg-slate-50">

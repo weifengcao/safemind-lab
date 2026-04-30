@@ -46,10 +46,10 @@ export default function Home() {
               Building governed <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">enterprise AI systems</span>
             </h1>
             <p className="text-xl text-slate-500 max-w-4xl mb-8 leading-relaxed font-light">
-              SafeMind Lab explores how enterprise AI systems are designed, evaluated, and evolved under real-world constraints: security, auditability, latency, cost, policy, and human review.
+              SafeMind Lab explores how enterprise AI systems are designed, evaluated, and evolved under real-world constraints. We study hybrid SaaS–AaaS architectures and build systems to measure, govern, and adapt them through feedback, evaluation, and human-in-the-loop review.
             </p>
             <p className="text-base md:text-lg text-slate-600 max-w-3xl mb-12 leading-relaxed">
-              The work is grounded in concrete engineering: agent harnesses, control planes, evaluation pipelines, and domain workloads such as SOC investigation and compliance review.
+              The work is grounded in concrete engineering: agent harnesses, control planes, evaluation pipelines, and investigation workloads such as compliance review.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
@@ -80,7 +80,7 @@ export default function Home() {
               </div>
               <h2 className="text-3xl font-bold tracking-tight text-slate-900">Latest Writing</h2>
               <p className="mt-4 text-lg text-slate-500 font-light leading-relaxed">
-                Long-form notes on enterprise AI systems, governed agent execution, SOC triage architecture, and managed agent lifecycles.
+                Long-form notes on enterprise AI systems, governed agent execution, and the transition from SaaS to agentic architectures.
               </p>
             </div>
             <Link to="/blog" className="text-blue-600 hover:text-indigo-600 font-bold text-xs uppercase tracking-widest flex items-center">
@@ -151,8 +151,8 @@ export default function Home() {
               {[
                 { icon: <Shield size={22} />, title: 'Agent Harness', desc: 'A governed runtime that separates reasoning from authority, policy, state, and tool execution.' },
                 { icon: <BarChart3 size={22} />, title: 'Evaluation Pipeline', desc: 'Metrics and review loops for correctness, evidence sufficiency, safety, latency, and cost.' },
-                { icon: <Workflow size={22} />, title: 'Field Workloads', desc: 'SOC triage and compliance systems used as concrete workloads, not abstract demos.' },
-                { icon: <GitBranch size={22} />, title: 'SaaS to Agentic Workflows', desc: 'Research into how existing enterprise workflows can be incrementally adapted into agent-assisted systems.' }
+                { icon: <Workflow size={22} />, title: 'Field Workloads', desc: 'Compliance and investigation systems used as concrete workloads, not abstract demos.' },
+                { icon: <GitBranch size={22} />, title: 'SaaS → AaaS Transition', desc: 'Research into how existing SaaS workflows can be incrementally adapted into agent-driven workflows.' }
               ].map((feature, idx) => (
                 <motion.div
                   key={idx}
