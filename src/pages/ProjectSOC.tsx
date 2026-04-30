@@ -1,28 +1,8 @@
 import { ShieldCheck, ArrowLeft, Terminal, Workflow, FileSearch, Network, ClipboardCheck, PauseCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import Mermaid from '../components/Mermaid';
 
 export default function ProjectSOC() {
-  const socLifecycleChart = `
-sequenceDiagram
-    participant V as Vendor (CrowdStrike/SentinelOne)
-    participant I as Ingest API (Canonical Alert)
-    participant C as Classifier (Alert Family)
-    participant P as Playbook (Deterministic Plan)
-    participant H as Harness (Execution)
-    participant G as Gateway (Governed Tools)
-    participant A as Analyst (Review)
-
-    V->>I: Raw Webhook
-    I->>C: Canonical Alert Object
-    C->>P: Bundle Rule Match
-    P->>H: Seed Investigation + Response Guidance
-    H->>G: Execute Allowed Reads/Writes
-    G->>H: Evidence + Action Ledger Links
-    H->>A: Verdict, Evidence Table, Approval Pause
-  `;
-
   return (
     <div className="pb-24">
       <SEO 
@@ -71,8 +51,17 @@ sequenceDiagram
 
           <section>
             <h2 className="text-3xl font-bold mb-8 text-slate-900 tracking-tight">Investigation Lifecycle</h2>
-            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 shadow-sm mb-12">
-               <Mermaid chart={socLifecycleChart} />
+            <p className="text-lg text-slate-500 font-light leading-relaxed mb-8">
+              Alert investigation is treated as a governed lifecycle, not a single model response. Raw alerts are normalized into cases, planned by the supervisor, executed through governed tools, evaluated against evidence quality, and closed only after policy and approval checks.
+            </p>
+            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm mb-12">
+              <img
+                src="/diagrams/simple_alert_investigation_lifecycle.png"
+                alt="Alert investigation lifecycle showing alert intake, case initialization, investigation planning, governed execution, evidence analysis, runtime evaluation, decision and action gate, and finalization."
+                className="h-auto w-full"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
             
             <h2 className="text-3xl font-bold mb-8 text-slate-900 tracking-tight">System Architecture</h2>
