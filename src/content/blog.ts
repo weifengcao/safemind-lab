@@ -10,6 +10,24 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'agent-security-is-authority-management',
+    title: 'Agent Security Is Authority Management, Not Just Prompt Defense',
+    excerpt: 'Enterprise agents need identity, delegation, tool-use policy, memory boundaries, audit, and revocation.',
+    date: '2026-05-04',
+    readTime: '10 min read',
+    category: 'Security',
+    url: 'https://wei16.substack.com/p/agent-security-is-authority-management',
+  },
+  {
+    slug: 'revisiting-enterprise-security-identity',
+    title: 'Revisiting Enterprise Security: Identity, Authority, and Trust in Large-Scale Systems',
+    excerpt: 'A modern security program should treat identity, authorization, secrets, audit, and policy as one trust system.',
+    date: '2026-05-04',
+    readTime: '10 min read',
+    category: 'Security',
+    url: 'https://wei16.substack.com/p/revisiting-enterprise-security-identity',
+  },
+  {
     slug: 'the-safemind-philosophy-governed-autonomy-not-raw-autonomy',
     title: 'The SafeMind Philosophy: Governed Autonomy, Not Raw Autonomy',
     excerpt: 'Why enterprise agents need structured authority boundaries, review paths, and policy-controlled autonomy instead of unrestricted action.',
