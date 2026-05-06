@@ -10,6 +10,15 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'governed-evaluation-for-investigation',
+    title: 'Evaluating Investigation Agents',
+    excerpt: 'Most agent evaluation starts at the response layer. Investigation agents fail one level deeper: at the state, evidence, and control layer.',
+    date: '2026-05-06',
+    readTime: '9 min read',
+    category: 'Evaluation',
+    url: 'https://wei16.substack.com/p/governed-evaluation-for-investigation',
+  },
+  {
     slug: 'agent-security-is-authority-management',
     title: 'Agent Security Is Authority Management, Not Just Prompt Defense',
     excerpt: 'Enterprise agents need identity, delegation, tool-use policy, memory boundaries, audit, and revocation.',
