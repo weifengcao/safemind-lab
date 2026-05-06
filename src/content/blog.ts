@@ -10,6 +10,24 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'tool-calls-for-investigation-agents',
+    title: 'Tool Calls for Investigation Agents',
+    excerpt: 'Why tools should be treated as governed capabilities, not model-owned functions. The planner should express intent, not execute effects.',
+    date: '2026-05-06',
+    readTime: '10 min read',
+    category: 'Architecture',
+    url: 'https://wei16.substack.com/p/tool-calls-for-investigation-agents',
+  },
+  {
+    slug: 'context-engineering-for-investigation',
+    title: 'Context Engineering for Investigation Agents',
+    excerpt: 'For production investigation agents, context engineering is not about filling a prompt. It is about deciding what the agent is allowed to know, what it must know, and what it should ignore.',
+    date: '2026-05-06',
+    readTime: '10 min read',
+    category: 'Architecture',
+    url: 'https://wei16.substack.com/p/context-engineering-for-investigation',
+  },
+  {
     slug: 'governed-evaluation-for-investigation',
     title: 'Evaluating Investigation Agents',
     excerpt: 'Most agent evaluation starts at the response layer. Investigation agents fail one level deeper: at the state, evidence, and control layer.',
