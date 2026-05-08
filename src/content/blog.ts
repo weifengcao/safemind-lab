@@ -10,6 +10,42 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: 'understanding-agent-skills-foundation',
+    title: 'Understanding Agent Skills: Foundation, Architecture, and Philosophy',
+    excerpt: 'What are skills, why Claude introduced them, and how they solve the problem of prompt bloat and knowledge reusability in agentic systems.',
+    date: '2026-05-08',
+    readTime: '12 min read',
+    category: 'Architecture',
+    url: 'https://wei16.substack.com/p/understanding-agent-skills-foundation',
+  },
+  {
+    slug: 'skills-vs-prompts-vs-contexts-decision-framework',
+    title: 'Skills vs Prompts vs Contexts: When to Use Each in Agent Systems',
+    excerpt: 'A practical decision framework for choosing whether to put domain knowledge in skills, prompts, or contexts. Includes decision trees and anti-patterns.',
+    date: '2026-05-08',
+    readTime: '11 min read',
+    category: 'Architecture',
+    url: 'https://wei16.substack.com/p/skills-vs-prompts-vs-contexts-decision',
+  },
+  {
+    slug: 'leveraging-skills-personal-agent-development',
+    title: 'Leveraging Skills for Personal Agent Development: Building, Composing, and Debugging',
+    excerpt: 'Practical patterns for individual developers: building your first skill, composing skills into agents, and debugging when things go wrong.',
+    date: '2026-05-08',
+    readTime: '13 min read',
+    category: 'Agents',
+    url: 'https://wei16.substack.com/p/leveraging-skills-personal-agents',
+  },
+  {
+    slug: 'skills-enterprise-agent-architecture',
+    title: 'Skills in Enterprise Agent Architecture: Governance, Scale, and Infrastructure',
+    excerpt: 'How CTOs scale agent systems from 5 to 500+ agents using skills as organizational infrastructure. Includes governance models and implementation timelines.',
+    date: '2026-05-08',
+    readTime: '14 min read',
+    category: 'Enterprise AI',
+    url: 'https://wei16.substack.com/p/skills-enterprise-agent-architecture',
+  },
+  {
     slug: 'tool-calls-for-investigation-agents',
     title: 'Tool Calls for Investigation Agents',
     excerpt: 'Why tools should be treated as governed capabilities, not model-owned functions. The planner should express intent, not execute effects.',
