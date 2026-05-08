@@ -25,10 +25,17 @@ Let's say you're building a **research assistant agent** that helps you write te
 
 ### Building Your First Skill
 
-Create a file: `skills/my_research_methodology.md`
+Create a folder with a required `SKILL.md` file:
+
+`skills/research-methodology/SKILL.md`
 
 ```markdown
-# Skill: Personal Research Methodology
+---
+name: research-methodology
+description: Structures technical research using Wei's evidence-first methodology, evaluation criteria, and writing preferences. Use when drafting research plans, analyzing technical claims, comparing architecture options, or writing technical analyses.
+---
+
+# Research Methodology
 
 ## Purpose
 Enable the agent to conduct analysis in my style: evidence-first,
@@ -104,11 +111,11 @@ skeptical of consensus, focused on first principles.
 
 ### Using This Skill in Your Agent
 
-Your agent prompt now says:
+If you're using Claude Code, install this Skill where Claude can discover it. If you're using the Claude API, upload it as a custom Skill and include it in `container.skills`. Your agent prompt can then stay short:
 
 ```
 You are a research assistant for Wei. When Wei asks you to research
-a topic, consult the "Personal Research Methodology" skill to structure
+a topic, use the research-methodology Skill to structure
 your analysis in the way Wei works best.
 ```
 
@@ -120,10 +127,15 @@ Beyond your personal style, you probably have domain expertise. Let's say you're
 
 Create a skill for industry-specific knowledge:
 
-`skills/fintech_trading_rules.md`
+`skills/fintech-trading-rules/SKILL.md`
 
 ```markdown
-# Skill: Fintech Trading Rules and Risk Policies
+---
+name: fintech-trading-rules
+description: Applies platform trading validation, risk limits, and US regulatory guardrails. Use when evaluating proposed trades, portfolio constraints, day-trading rules, wash-sale risks, or trading compliance workflows.
+---
+
+# Fintech Trading Rules and Risk Policies
 
 ## Purpose
 Provide agents with understanding of safe, compliant trading operations
@@ -138,7 +150,7 @@ for our platform.
 ## Trade Validation Rules
 
 ### Order Type Validation
-- **Market orders**: Only during market hours (9:30-16:00 EST)
+- **Market orders**: Only during regular market hours (9:30-16:00 ET)
 - **Limit orders**: Any time (but execute only during market hours)
 - **Stop-loss orders**: Risk validation required
 
@@ -213,16 +225,15 @@ Your **Investment Analysis Agent** composes multiple skills:
 
 ```
 Agent: Investment Analyst
-Composition:
-  ├─ Personal Research Methodology skill
-  ├─ Fintech Trading Rules skill
-  ├─ Market Analysis skill
-  └─ Portfolio Theory skill
+Available Skills:
+  ├─ research-methodology
+  ├─ fintech-trading-rules
+  ├─ market-analysis
+  └─ portfolio-theory
 
 System Prompt:
-  "You are an investment analysis agent. You combine your personal
-   research methodology with fintech domain knowledge to provide
-   sound investment guidance."
+  "You are an investment analysis agent. Use the available Skills
+   when they are relevant to the user's task."
 ```
 
 ### Why This Matters
@@ -230,7 +241,7 @@ System Prompt:
 You can now:
 
 1. **Reuse**: "Code Review Standards" skill used by both Code Review and Integration Testing agents
-2. **Update**: Change "Fintech Trading Rules" once, all agents using it get the new version
+2. **Update**: Change "Fintech Trading Rules" once, then intentionally move API callers to the new version or update the shared local/plugin Skill
 3. **Organize**: Skills become your knowledge library
 4. **Share**: When a colleague joins, you hand them the skills your agents use
 
@@ -295,7 +306,20 @@ Group related thoughts:
 - Comments in standard format
 ```
 
-### Step 3: Make It Checkable
+### Step 3: Add Claude Skill Metadata
+
+Add the required YAML frontmatter. The `name` must use lowercase letters, numbers, and hyphens. The `description` is critical because Claude uses it to decide when to load the Skill.
+
+```markdown
+---
+name: reviewing-code
+description: Reviews code for correctness, readability, performance, tests, and project conventions. Use when the user asks for a code review, PR review, staged diff review, or implementation quality assessment.
+---
+
+# Code Review Standards
+```
+
+### Step 4: Make It Checkable
 
 Turn vague principles into observable criteria:
 
@@ -306,11 +330,11 @@ Turn vague principles into observable criteria:
 > "If iterating a list, check that N < 10,000 rows (for in-memory ops).
 >  If N might be larger, consider pagination or database queries."
 
-### Step 4: Add Examples
+### Step 5: Add Examples
 
 For each criterion, provide examples of good/bad:
 
-```
+````markdown
 ### Example: Readability
 
 **Bad:**
@@ -332,7 +356,21 @@ def sum_values_for_key(data: list[dict], key: str) -> int:
 
 Why: Variable names (`data`, `key`) are clear. Function name explains purpose.
 No loop overhead. Edge case (missing key) handled.
+````
+
+### Step 6: Split Large Details Into Referenced Files
+
+Keep `SKILL.md` concise. If the Skill grows, link to one-level-deep reference files:
+
+```text
+reviewing-code/
+├─ SKILL.md
+├─ security-checks.md
+├─ performance-checks.md
+└─ examples.md
 ```
+
+Claude can load `SKILL.md` first, then read `security-checks.md` only when the review needs security-specific guidance.
 
 ## Debugging Skills: When Things Go Wrong
 
@@ -348,10 +386,11 @@ Agent did: "I bought 30% of the portfolio in Tesla"
 ```
 
 **Debug**:
-1. Verify the agent composition includes the skill
-2. Check if the agent's prompt contradicts the skill
-3. Test the agent with a simple, direct query
-4. Check if the LLM is even reading the skill (sometimes longer skills get truncated)
+1. Verify the Skill is installed or included in the API `container.skills`
+2. Check whether the Skill description is specific enough for Claude to trigger it
+3. Check if the agent's prompt contradicts the Skill
+4. Test with a simple query that should clearly trigger the Skill
+5. Check whether `SKILL.md` is too long or buries the relevant instruction
 
 **Common issue**: Your skill is great, but your agent prompt has conflicting guidance:
 
@@ -369,8 +408,8 @@ Skill: "Position limit: 20% max per stock"
 Your skill says X, but the world changed:
 
 ```
-Skill says: "Market hours: 9:30-16:00 EST"
-But it's now 2026 and markets open earlier: 9:00-16:00 EST
+Skill says: "Daily transfer limit: $5M"
+But Finance approved a new $10M limit on 2026-05-08
 Agent is now wrong.
 ```
 
@@ -380,7 +419,7 @@ Agent is now wrong.
 # Skill: Trading Rules
 ## Version History
 - v1.0 (2024): Initial
-- v2.0 (2026-05-08): Updated market hours to 9:00-16:00 EST
+- v2.0 (2026-05-08): Updated daily transfer limit to $10M
 ```
 
 ### Debugging Pattern 3: Over-Generalization
@@ -406,12 +445,14 @@ Smaller, focused skills are easier to understand, debug, and update.
 
 ## Best Practices for Personal Skills
 
-1. **Keep them focused**: One skill = one domain capability
-2. **Make them checkable**: Can someone verify each rule? Can an agent check it?
-3. **Version them**: Track changes over time
-4. **Add examples**: Abstract rules become concrete with examples
-5. **Review periodically**: Skills ossify. Revisit them quarterly.
-6. **Document the "why"**: Not just "rule is X", but why it exists
+1. **Keep them focused**: One Skill = one task capability
+2. **Write strong metadata**: The `description` should say what the Skill does and when Claude should use it
+3. **Make them checkable**: Can someone verify each rule? Can Claude test it on example tasks?
+4. **Version them**: Pin API versions in production; use Git or plugin releases locally
+5. **Add examples**: Abstract rules become concrete with examples
+6. **Split large references**: Keep `SKILL.md` concise and link to deeper files as needed
+7. **Review periodically**: Skills ossify. Revisit them quarterly.
+8. **Document the "why"**: Not just "rule is X", but why it exists
 
 ## From Personal to Organizational
 

@@ -22,39 +22,43 @@ export default function Blog() {
 
       <section className="max-w-4xl mx-auto px-4 mt-16">
         <div className="space-y-16">
-          {blogPosts.map((post, idx) => (
-            <motion.article
-              key={post.slug}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.08 }}
-              viewport={{ once: true }}
-              className="group"
-            >
-              <a href={post.url} target="_blank" rel="noreferrer" className="block">
-                <div className="flex flex-wrap gap-4 mb-4">
-                  <span className="flex items-center text-[10px] font-bold text-blue-600 uppercase tracking-widest">
-                    <Tag size={10} className="mr-2" /> {post.category}
-                  </span>
-                  <span className="flex items-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                    <Clock size={10} className="mr-2" /> {post.readTime}
-                  </span>
-                </div>
+          {blogPosts.map((post, idx) => {
+            const isExternal = /^https?:\/\//.test(post.url);
 
-                <h2 className="text-3xl font-extrabold mb-4 text-slate-900 group-hover:text-blue-600 transition-colors leading-tight tracking-tight">
-                  {post.title}
-                </h2>
+            return (
+              <motion.article
+                key={post.slug}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.08 }}
+                viewport={{ once: true }}
+                className="group"
+              >
+                <a href={post.url} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noreferrer' : undefined} className="block">
+                  <div className="flex flex-wrap gap-4 mb-4">
+                    <span className="flex items-center text-[10px] font-bold text-blue-600 uppercase tracking-widest">
+                      <Tag size={10} className="mr-2" /> {post.category}
+                    </span>
+                    <span className="flex items-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      <Clock size={10} className="mr-2" /> {post.readTime}
+                    </span>
+                  </div>
 
-                <p className="text-lg text-slate-500 mb-6 leading-relaxed font-light">
-                  {post.excerpt}
-                </p>
+                  <h2 className="text-3xl font-extrabold mb-4 text-slate-900 group-hover:text-blue-600 transition-colors leading-tight tracking-tight">
+                    {post.title}
+                  </h2>
 
-                <div className="flex items-center text-xs font-bold text-slate-900 uppercase tracking-widest group-hover:text-blue-600 transition-all">
-                  Read Essay <ArrowUpRight size={16} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </div>
-              </a>
-            </motion.article>
-          ))}
+                  <p className="text-lg text-slate-500 mb-6 leading-relaxed font-light">
+                    {post.excerpt}
+                  </p>
+
+                  <div className="flex items-center text-xs font-bold text-slate-900 uppercase tracking-widest group-hover:text-blue-600 transition-all">
+                    Read Essay <ArrowUpRight size={16} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  </div>
+                </a>
+              </motion.article>
+            );
+          })}
         </div>
       </section>
     </div>

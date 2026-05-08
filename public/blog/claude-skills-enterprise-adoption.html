@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Claude Skills: The Enterprise Architecture Question</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  :root {
+    --text: #1a1917;
+    --muted: #5c5a55;
+    --border: #e4e2dc;
+    --bg: #faf9f7;
+    --accent: #2a6049;
+    --accent-light: #eef4f1;
+    --amber: #c4760a;
+    --amber-light: #fdf3e3;
+    --code-bg: #f2f0ea;
+    --blue: #1d4e89;
+    --blue-light: #eaf0f9;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.75;
+    color: var(--text);
+    background: var(--bg);
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  /* Typography */
+  h1 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 2.1rem;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 3rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 2.5rem 0 0.75rem;
+    color: var(--text);
+  }
+
+  h4 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin: 1.75rem 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  p { margin-bottom: 1.25rem; }
+  p:last-child { margin-bottom: 0; }
+
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Header */
+  .post-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .subtitle {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-top: 0.75rem;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .byline {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 1.25rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* Pullquote */
+  .pullquote {
+    border-left: 3px solid var(--accent);
+    padding: 0.75rem 1.5rem;
+    margin: 2rem 0;
+    background: var(--accent-light);
+    border-radius: 0 6px 6px 0;
+  }
+
+  .pullquote p {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--text);
+    margin: 0;
+  }
+
+  /* Callout */
+  .callout {
+    background: var(--amber-light);
+    border: 1px solid #e8c67a;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin: 2rem 0;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .callout .callout-label {
+    font-weight: 600;
+    color: var(--amber);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.35rem;
+  }
+
+  /* Code */
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    font-family: 'Courier New', monospace;
+    color: #2d2c28;
+  }
+
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.82em;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: #2d2c28;
+  }
+
+  pre code { background: none; border: none; padding: 0; font-size: 1em; }
+
+  /* Lists */
+  ul, ol {
+    margin: 1rem 0 1.25rem 1.5rem;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  li { margin-bottom: 0.4rem; }
+  li:last-child { margin-bottom: 0; }
+
+  /* Tables */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.9rem;
+  }
+
+  th {
+    text-align: left;
+    padding: 10px 14px;
+    background: var(--code-bg);
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #f7f5f0; }
+
+  /* Section rule */
+  .section-rule {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 3rem 0;
+  }
+
+  /* Diagram container */
+  .diagram-wrap {
+    margin: 2rem 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .diagram-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    padding: 8px 0 10px;
+    background: var(--code-bg);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.03em;
+  }
+
+  svg.diagram {
+    display: block;
+    width: 100%;
+  }
+
+  /* Tier badge */
+  .tier-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin: 1.5rem 0;
+  }
+
+  .tier-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    background: #fff;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  .tier-card .tier-name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+
+  .tier-card .tier-desc {
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  .tier-card .tier-review {
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin-top: 0.35rem;
+    font-weight: 600;
+  }
+
+  /* References */
+  .references {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .references a { color: var(--blue); font-size: 0.85rem; }
+
+  .references li { margin-bottom: 0.5rem; }
+
+  /* Stage steps */
+  .stages {
+    counter-reset: stage;
+    margin: 1.25rem 0;
+  }
+
+  .stage {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 1.25rem;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  .stage-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .stage-body strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .stage-body p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="post-header">
+  <h1>Claude Skills and the Enterprise Architecture Question</h1>
+  <p class="subtitle">Where reusable procedural memory fits — and where it doesn't — in an enterprise agent system.</p>
+  <p class="byline">May 2026</p>
+</div>
+
+<p>At first glance, a Claude Skill looks like a nicer way to organize prompts. Create a <code>SKILL.md</code>, add instructions, include reference files, and Claude loads it when relevant.</p>
+
+<p>That description is true, but incomplete.</p>
+
+<div class="pullquote">
+  <p>A Skill is reusable procedural memory for Claude — not a policy engine, not a knowledge base, not a tool layer.</p>
+</div>
+
+<p>It packages instructions, examples, templates, scripts, and workflow-specific resources so Claude can specialize itself for a task without forcing you to paste the same guidance into every prompt. That makes Skills valuable. It also raises a question for companies building agent systems: <em>should Skills become part of our enterprise agent architecture?</em></p>
+
+<p>The short answer: yes, but carefully. Skills are excellent for personal and team workflows, useful for enterprise agents, and dangerous if treated as an unchecked policy or tool layer.</p>
+
+<h2>What Claude Skills Actually Are</h2>
+
+<p>A Claude Skill is a reusable, filesystem-based capability package. It usually contains:</p>
+
+<pre>support-escalation/
+├── SKILL.md
+├── escalation-rules.md
+├── examples.md
+└── scripts/
+    └── validate_ticket.py</pre>
+
+<p>The required file is <code>SKILL.md</code>. It includes metadata (especially <code>name</code> and <code>description</code>) plus instructions Claude follows when the Skill is active.</p>
+
+<p>The important design idea is <strong>progressive disclosure</strong>. Claude doesn't need every Skill file in context at all times. It sees Skill metadata first, loads the relevant Skill, then reads deeper reference files or uses bundled scripts if needed. This matters because large prompts don't scale. If every agent carries every policy, template, checklist, and workflow rule in its system prompt, that prompt becomes bloated, brittle, and hard to govern.</p>
+
+<p>Skills offer a cleaner shape:</p>
+
+<pre>Small agent prompt
+  + Available Skills
+  + Task-specific context
+  + Tools and policies</pre>
+
+<p>But Skills are not magic. They don't automatically enforce policy, grant tool access, replace a permission system, or replace retrieval over a large knowledge base. They help Claude know <em>how to do something</em>.</p>
+
+<h2>The Mental Model: Procedural Memory, Not Company Brain</h2>
+
+<p>The best Skills describe a repeatable way of doing work.</p>
+
+<p><strong>Good Skill candidates:</strong> how we write customer incident summaries; how we review Terraform changes; how our finance team validates a forecast model; how we turn sales call notes into CRM updates; how we prepare board deck narratives; how we triage support tickets before escalation.</p>
+
+<p><strong>Weak Skill candidates:</strong> all company knowledge; current customer account data; real-time pricing; authorization rules; a full policy handbook; a large corpus that should be searched; anything requiring live system access.</p>
+
+<p>Skills are best for reusable procedures, templates, and task-specific know-how. They are not the right primitive for every kind of knowledge.</p>
+
+<h2>Skills vs. the Other Primitives</h2>
+
+<p>Most confusion comes from mixing up five different things:</p>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr><th>Primitive</th><th>Best for</th><th>Example</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Prompt</strong></td><td>Agent role, behavior, durable operating principles</td><td>"You are a careful support triage agent."</td></tr>
+    <tr><td><strong>Context</strong></td><td>Facts for this specific task</td><td>"This ticket is from Acme, created today, priority P1."</td></tr>
+    <tr><td><strong>Skill</strong></td><td>Reusable procedure or workflow guidance</td><td>"Use our escalation summary format and evidence checklist."</td></tr>
+    <tr><td><strong>Tool / API / MCP</strong></td><td>Live data or external action</td><td>Read ticket, route ticket, notify owner</td></tr>
+    <tr><td><strong>RAG / Knowledge base</strong></td><td>Large searchable factual corpus</td><td>Search support docs, contracts, policies</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>If the data changes often, it's probably context, a tool result, or retrieval. If the agent needs to take action, it's a tool. If the agent needs to search a large body of facts, it's RAG. If the agent needs a reusable way of doing a task, it may be a Skill.</p>
+
+<!-- DIAGRAM 1: Skills in the stack -->
+<div class="diagram-wrap">
+<svg class="diagram" viewBox="0 0 640 300" role="img">
+  <title>How Skills fit alongside other agent primitives</title>
+  <defs>
+    <marker id="arr1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#2a6049" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <!-- Stack items left side -->
+  <rect x="40" y="28" width="200" height="40" rx="6" fill="#eef4f1" stroke="#7db8a0" stroke-width="0.8"/>
+  <text x="140" y="53" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="13" font-weight="600" fill="#1a4d38">Prompt</text>
+
+  <rect x="40" y="80" width="200" height="40" rx="6" fill="#fdf3e3" stroke="#e8c67a" stroke-width="0.8"/>
+  <text x="140" y="105" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="13" font-weight="600" fill="#7a4a08">Context</text>
+
+  <rect x="40" y="132" width="200" height="40" rx="6" fill="#1d4e89" stroke="#1d4e89" stroke-width="0.8"/>
+  <text x="140" y="150" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="13" font-weight="600" fill="#fff">Skill</text>
+  <text x="140" y="165" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="10" fill="#b0c8e8">reusable procedure</text>
+
+  <rect x="40" y="184" width="200" height="40" rx="6" fill="#eef4f1" stroke="#7db8a0" stroke-width="0.8"/>
+  <text x="140" y="209" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="13" font-weight="600" fill="#1a4d38">Tool / MCP</text>
+
+  <rect x="40" y="236" width="200" height="40" rx="6" fill="#faf9f7" stroke="#c8c6be" stroke-width="0.8"/>
+  <text x="140" y="261" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="13" font-weight="600" fill="#5c5a55">RAG / Knowledge</text>
+
+  <!-- Arrow to agent -->
+  <line x1="242" y1="152" x2="306" y2="152" stroke="#2a6049" stroke-width="1.5" marker-end="url(#arr1)"/>
+
+  <!-- Agent box -->
+  <rect x="308" y="100" width="130" height="104" rx="10" fill="#2a6049" stroke="#1a4d38" stroke-width="1"/>
+  <text x="373" y="148" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="14" font-weight="600" fill="#fff">Agent</text>
+  <text x="373" y="167" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="10" fill="#9ad3bc">Claude + harness</text>
+
+  <!-- Arrow out -->
+  <line x1="440" y1="152" x2="506" y2="152" stroke="#2a6049" stroke-width="1.5" marker-end="url(#arr1)"/>
+
+  <!-- Output -->
+  <rect x="508" y="118" width="110" height="68" rx="8" fill="#faf9f7" stroke="#c8c6be" stroke-width="0.8"/>
+  <text x="563" y="148" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="13" font-weight="600" fill="#1a1917">Output</text>
+  <text x="563" y="164" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="10" fill="#5c5a55">action / response</text>
+
+  <!-- "Skills inform" label -->
+  <text x="275" y="134" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="9" fill="#2a6049" font-style="italic">informs</text>
+</svg>
+<div class="diagram-label">Figure 1 — Skills are one input among many; the agent and harness integrate them all</div>
+</div>
+
+<h2>Where Skills Fit Best</h2>
+
+<p>Skills fit best in personal and team workflows first. That may sound surprising if you're thinking about enterprise agents, but it is the right adoption path.</p>
+
+<h3>Personal Agents: Strong Fit</h3>
+
+<p>Personal workflows are procedural and preference-heavy: how I write technical analysis; how I review code; how I prepare weekly planning notes; how I summarize research papers; how I evaluate startup ideas. These Skills can be messy at first. The user is close to the work, can see when the Skill misfires, and can iterate quickly. Governance burden is low; value is immediate.</p>
+
+<h3>Team Agents: Strong Fit</h3>
+
+<p>Team workflows are also a good fit: engineering code review checklists; incident postmortem templates; support escalation summary formats; sales discovery call summaries; legal contract review checklists; finance model validation steps. At the team level, Skills convert tribal knowledge into reusable workflow assets.</p>
+
+<h3>Enterprise Agents: Conditional Fit</h3>
+
+<p>Enterprise agents can use Skills, but the bar is higher. An enterprise Skill should be owned, reviewed, versioned, evaluated, security-vetted, bound to approved agents, and monitored at runtime. Once a Skill influences customer-facing, regulated, financial, security, or operational decisions, it becomes part of your enterprise control surface. It should be treated like software.</p>
+
+<h2>The CTO Question</h2>
+
+<div class="pullquote">
+  <p>Should all our enterprise agents use Skills? No. Not all. But every enterprise agent program should decide where Skills belong.</p>
+</div>
+
+<p>Skills should be one primitive in the architecture, not the architecture itself.</p>
+
+<ul>
+  <li>Use Skills for shared procedures.</li>
+  <li>Use tools and MCP servers for external actions and live data.</li>
+  <li>Use RAG for large factual knowledge.</li>
+  <li>Use prompts for agent behavior.</li>
+  <li>Use policy engines for permissions, approvals, and compliance.</li>
+  <li>Use evals for quality and safety validation.</li>
+  <li>Use audit/replay for traceability.</li>
+</ul>
+
+<p>The mistake is turning Skills into the place where everything goes. That recreates the prompt-bloat problem in a different folder.</p>
+
+<h2>Should Employees Write and Share Their Own Skills?</h2>
+
+<p>Yes, but with tiers. Employees closest to the work often know the best workflows. Blocking them from creating Skills loses a valuable bottom-up discovery mechanism. But letting every employee publish arbitrary Skills into production agents is not acceptable. A better model:</p>
+
+<div class="tier-grid">
+  <div class="tier-card">
+    <div class="tier-name">Personal</div>
+    <div class="tier-desc">Creator only</div>
+    <div class="tier-review">Basic guardrails</div>
+  </div>
+  <div class="tier-card">
+    <div class="tier-name">Team</div>
+    <div class="tier-desc">Team workspace</div>
+    <div class="tier-review">Peer review + owner</div>
+  </div>
+  <div class="tier-card">
+    <div class="tier-name">Approved Enterprise</div>
+    <div class="tier-desc">Broad internal use</div>
+    <div class="tier-review">Domain, security, eval review</div>
+  </div>
+  <div class="tier-card">
+    <div class="tier-name">Production Agent</div>
+    <div class="tier-desc">Production agents only</div>
+    <div class="tier-review">Full change control</div>
+  </div>
+</div>
+
+<p>Employees can create Skills. Enterprise agents can consume only approved Skills.</p>
+
+<h2>Raw Skill Files or a Harness Platform?</h2>
+
+<h4>One team, internal productivity</h4>
+<p>Use raw Skill files or Claude's native Skill support. A platform is premature. The useful work at this stage is learning which workflows repeat and which Skills actually help. Keep Skills in a team repo, require peer review for shared Skills, avoid secrets and unsafe scripts, document owner and purpose.</p>
+
+<h4>Several teams creating similar Skills</h4>
+<p>Start a lightweight catalog. You don't need a full runtime platform, but you do need visibility into what Skills exist, who owns them, which are experimental, and which should stay out of production. A simple YAML catalog prevents duplicate, stale, or unsafe Skills from spreading quietly.</p>
+
+<h4>When to move to a harness-managed system</h4>
+<p>Refactor when Skills start affecting enterprise workflows, sensitive data, or production agents. The signals: multiple agents need the same Skills; Skills influence customer-facing outputs; Skills include executable scripts; Skills use sensitive data; you need version pinning and rollback; you need audit logs; different model providers need to consume the same Skill concept; employees are sharing Skills faster than reviewers can track.</p>
+
+<h4>Production agents and employee-created Skills</h4>
+<p>Production agents should load only approved enterprise Skills. Employee-created Skills should enter a structured intake process:</p>
+
+<!-- DIAGRAM 2: Promotion pipeline -->
+<div class="diagram-wrap">
+<svg class="diagram" viewBox="0 0 640 160" role="img">
+  <title>Skill promotion pipeline from personal to production</title>
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#5c5a55" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <!-- Step boxes -->
+  <rect x="20" y="52" width="90" height="56" rx="6" fill="#faf9f7" stroke="#c8c6be" stroke-width="0.8"/>
+  <text x="65" y="77" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="11" font-weight="600" fill="#1a1917">Personal /</text>
+  <text x="65" y="92" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="11" font-weight="600" fill="#1a1917">Team Skill</text>
+
+  <line x1="112" y1="80" x2="128" y2="80" stroke="#5c5a55" stroke-width="1.2" marker-end="url(#arr2)"/>
+
+  <rect x="130" y="52" width="90" height="56" rx="6" fill="#fdf3e3" stroke="#e8c67a" stroke-width="0.8"/>
+  <text x="175" y="77" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="11" font-weight="600" fill="#7a4a08">Review +</text>
+  <text x="175" y="92" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="11" font-weight="600" fill="#7a4a08">Normalize</text>
+
+  <line x1="222" y1="80" x2="238" y2="80" stroke="#5c5a55" stroke-width="1.2" marker-end="url(#arr2)"/>
+
+  <rect x="240" y="52" width="90" height="56" rx="6" fill="#fdf3e3" stroke="#e8c67a" stroke-width="0.8"/>
+  <text x="285" y="77" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="11" font-weight="600" fill="#7a4a08">Security +</text>
+  <text x="285" y="92" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="11" font-weight="600" fill="#7a4a08">Evals</text>
+
+  <line x1="332" y1="80" x2="348" y2="80" stroke="#5c5a55" stroke-width="1.2" marker-end="url(#arr2)"/>
+
+  <rect x="350" y="52" width="100" height="56" rx="6" fill="#eef4f1" stroke="#7db8a0" stroke-width="0.8"/>
+  <text x="400" y="77" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="11" font-weight="600" fill="#1a4d38">Approved</text>
+  <text x="400" y="92" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="11" font-weight="600" fill="#1a4d38">Enterprise Catalog</text>
+
+  <line x1="452" y1="80" x2="468" y2="80" stroke="#5c5a55" stroke-width="1.2" marker-end="url(#arr2)"/>
+
+  <rect x="470" y="52" width="110" height="56" rx="6" fill="#1d4e89" stroke="#1d4e89" stroke-width="0.8"/>
+  <text x="525" y="77" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="11" font-weight="600" fill="#fff">Production</text>
+  <text x="525" y="92" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="11" font-weight="600" fill="#fff">Agent Binding</text>
+</svg>
+<div class="diagram-label">Figure 2 — Employee Skills are a discovery mechanism. Enterprise Skills are governed deployment artifacts.</div>
+</div>
+
+<p>During normalization: remove personal quirks, secrets, stale examples, and one-off assumptions. Standardize terminology. Clarify the trigger description. Split large references. Add owners, review dates, and test cases.</p>
+
+<h2>Security: Treat Skills Like Software</h2>
+
+<p>Skills can include instructions, files, templates, and executable scripts. A malicious or careless Skill can direct Claude toward unsafe behavior.</p>
+
+<p>The risks are concrete. Consider two Skills that conflict:</p>
+
+<pre># Skill A (support team)
+When summarizing support tickets, include all customer
+details for completeness.
+
+# Skill B (privacy team)
+Mask customer PII in all generated summaries.</pre>
+
+<p>Which one wins? If you don't test conflict behavior, you're guessing. The full risk surface also includes: unsafe instructions conflicting with enterprise policy; scripts reading broad filesystem paths; hardcoded secrets; external URLs or data exfiltration attempts; over-broad trigger descriptions that activate the Skill in the wrong context; stale compliance guidance; and third-party Skill supply-chain risk.</p>
+
+<p>Enterprise controls should include an approved Skill catalog, required ownership for every shared Skill, security review for scripts and external references, secret scanning, trigger/non-trigger evals, conflict evals, version pinning, rollback plans, runtime audit logging, and data retention review.</p>
+
+<div class="callout">
+  <div class="callout-label">Note on platform constraints</div>
+  Anthropic's documentation notes that API requests support a limited number of Skills per request, custom Skill uploads have size limits, code execution has environment constraints, and Agent Skills are not eligible for Zero Data Retention. Review these details before regulated production use.
+</div>
+
+<h2>How Skills Fit Into an Enterprise Agent Harness</h2>
+
+<p>Skills should not bypass the harness primitives. They should feed into them.</p>
+
+<div class="pullquote">
+  <p>Skills inform the agent. The harness authorizes, executes, evaluates, and audits.</p>
+</div>
+
+<p>In a governed harness, a Skill is a versioned asset:</p>
+
+<pre>skill_id: support-escalation
+version: 2026-05-08
+status: approved
+owner: support-ops
+risk_level: medium
+allowed_agents:
+  - support-router
+  - customer-success-assistant
+required_tools:
+  - ticketing.read
+data_classes:
+  - customer-support-data
+eval_suite: support-escalation-v3</pre>
+
+<p>Agents bind to approved Skills declaratively, with narrow scope — not a browse-all. At runtime, the harness resolves whether the Skill is approved, whether the version is allowed, whether the agent and session have permission, whether required tools are available, and whether the provider supports the Skill natively.</p>
+
+<!-- DIAGRAM 3: Harness architecture -->
+<div class="diagram-wrap">
+<svg class="diagram" viewBox="0 0 640 320" role="img">
+  <title>Enterprise harness architecture showing how Skills flow through governance layers</title>
+  <defs>
+    <marker id="arr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#5c5a55" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arr3b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#1d4e89" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- Approved Skill Catalog -->
+  <rect x="20" y="20" width="150" height="56" rx="8" fill="#eef4f1" stroke="#7db8a0" stroke-width="0.8"/>
+  <text x="95" y="46" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="12" font-weight="600" fill="#1a4d38">Approved Skill</text>
+  <text x="95" y="62" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="12" font-weight="600" fill="#1a4d38">Catalog</text>
+
+  <line x1="172" y1="48" x2="208" y2="48" stroke="#5c5a55" stroke-width="1.2" marker-end="url(#arr3)"/>
+
+  <!-- Skill Resolver -->
+  <rect x="210" y="20" width="130" height="56" rx="8" fill="#fdf3e3" stroke="#e8c67a" stroke-width="0.8"/>
+  <text x="275" y="46" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="12" font-weight="600" fill="#7a4a08">Skill Resolver</text>
+  <text x="275" y="62" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="10" fill="#c4760a">auth · version · scope</text>
+
+  <line x1="342" y1="48" x2="378" y2="48" stroke="#5c5a55" stroke-width="1.2" marker-end="url(#arr3)"/>
+
+  <!-- Context Builder -->
+  <rect x="380" y="20" width="140" height="56" rx="8" fill="#fdf3e3" stroke="#e8c67a" stroke-width="0.8"/>
+  <text x="450" y="46" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="12" font-weight="600" fill="#7a4a08">Context Builder</text>
+  <text x="450" y="62" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="10" fill="#c4760a">prompt + skill + facts</text>
+
+  <!-- Down arrow from context builder -->
+  <line x1="450" y1="78" x2="450" y2="118" stroke="#5c5a55" stroke-width="1.2" marker-end="url(#arr3)"/>
+
+  <!-- Provider Adapter -->
+  <rect x="340" y="120" width="220" height="68" rx="8" fill="#1d4e89" stroke="#1d4e89" stroke-width="0.8"/>
+  <text x="450" y="150" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="12" font-weight="600" fill="#fff">Provider Adapter</text>
+  <text x="390" y="170" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="10" fill="#b0c8e8">Claude: native</text>
+  <text x="450" y="170" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="10" fill="#b0c8e8">·</text>
+  <text x="510" y="170" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="10" fill="#b0c8e8">Others: compiled</text>
+
+  <!-- Harness layer below -->
+  <line x1="450" y1="190" x2="450" y2="228" stroke="#5c5a55" stroke-width="1.2" marker-end="url(#arr3)"/>
+
+  <rect x="280" y="230" width="340" height="56" rx="8" fill="#faf9f7" stroke="#c8c6be" stroke-width="0.8"/>
+  <text x="450" y="258" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="11" font-weight="600" fill="#5c5a55">Harness: policy · tool · eval · audit</text>
+  <text x="450" y="274" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="10" fill="#888780">Skills inform. Harness authorizes.</text>
+
+  <!-- Left label -->
+  <text x="205" y="155" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="9" fill="#5c5a55" font-style="italic">Tools still own actions.</text>
+  <text x="205" y="168" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="9" fill="#5c5a55" font-style="italic">Policy still owns authz.</text>
+  <text x="205" y="181" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="9" fill="#5c5a55" font-style="italic">RAG still owns retrieval.</text>
+  <text x="205" y="194" text-anchor="middle" font-family="'Source Sans 3',sans-serif" font-size="9" fill="#5c5a55" font-style="italic">Evals still own quality.</text>
+</svg>
+<div class="diagram-label">Figure 3 — The enterprise harness resolves, adapts, and governs; Skills are one input, not the control plane</div>
+</div>
+
+<p>For Claude, the adapter maps approved Skills into Claude's native Skills mechanism. For other providers, the harness compiles the same Skill asset into instructions, retrieval documents, controlled tools, or guardrails. The enterprise abstraction should be provider-neutral, even if Claude is the first native implementation.</p>
+
+<h2>A Practical Adoption Plan</h2>
+
+<p>Don't start by building a giant Skill platform. Use this sequence:</p>
+
+<div class="stages">
+  <div class="stage">
+    <div class="stage-num">1</div>
+    <div class="stage-body">
+      <strong>Personal and team experimentation</strong>
+      <p>Allow low-risk Skills in writing style, document formatting, code review checklists, incident templates. Goal: learn where Skills actually save time.</p>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="stage-num">2</div>
+    <div class="stage-body">
+      <strong>Team libraries</strong>
+      <p>Let teams share reviewed Skills. Require owner, description, examples, review date. No secrets, no unsafe scripts. Goal: turn repeated workflows into reusable assets.</p>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="stage-num">3</div>
+    <div class="stage-body">
+      <strong>Enterprise intake</strong>
+      <p>Create a lightweight intake process for Skills reused across teams, tied to high-value workflows, and easy to test. Goal: identify which Skills deserve promotion.</p>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="stage-num">4</div>
+    <div class="stage-body">
+      <strong>Approved enterprise catalog</strong>
+      <p>Promote only reviewed and evaluated Skills. Require domain owner approval, security review, trigger/non-trigger evals, conflict evals, versioning, and rollback plans.</p>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="stage-num">5</div>
+    <div class="stage-body">
+      <strong>Production agent binding</strong>
+      <p>Bind approved Skills to specific agents with a narrow, declared set. Each agent gets only the Skills, tools, policies, and data classes it actually needs.</p>
+    </div>
+  </div>
+</div>
+
+<h2>When Not to Use Skills</h2>
+
+<p>Don't use Skills just because the feature exists. Avoid them when a short prompt is enough; when the workflow changes every day; when the data is live or external; when the task needs strict authorization; when the content belongs in a knowledge base; when the logic belongs in deterministic code; when the policy must be enforced by systems; or when the agent would need more Skills than it can reliably select from.</p>
+
+<p>That last point matters. More Skills is not always better. Too many available Skills create selection noise. A good architecture limits the Skill set available to each role or task type.</p>
+
+<h2>The Bottom Line</h2>
+
+<p>Claude Skills solve a real problem: reusable procedures don't belong in every prompt. They're especially strong for personal and team agents, and can be valuable in enterprise agents — but they should not be treated as a shortcut around enterprise architecture.</p>
+
+<p>The right design principle is simple: <strong>Skills inform. Harness authorizes.</strong> Build Skills as governed assets, let Claude consume them natively, let other providers consume them through adapters, and keep the harness responsible for authorization, execution, evaluation, and audit.</p>
+
+<p>Skills are not everything. But governed properly, they are a practical way to turn repeated human workflows into reusable agent capabilities.</p>
+
+<hr class="section-rule"/>
+
+<div class="references">
+  <strong>References</strong>
+  <ul>
+    <li><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">Anthropic Claude Agent Skills overview</a></li>
+    <li><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/enterprise">Anthropic Skills for enterprise</a></li>
+    <li><a href="https://platform.claude.com/docs/en/managed-agents/skills">Anthropic Managed Agents Skills</a></li>
+    <li><a href="https://platform.claude.com/docs/en/build-with-claude/zero-data-retention">Anthropic Zero Data Retention notes</a></li>
+  </ul>
+</div>
+
+</body>
+</html>

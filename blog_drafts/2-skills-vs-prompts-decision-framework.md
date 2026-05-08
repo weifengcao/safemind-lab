@@ -7,7 +7,7 @@
 You're building an agent. You have domain knowledge that needs to be represented. You have three options:
 
 1. Put it in the **system prompt**
-2. Put it in **skills**
+2. Put it in an Anthropic **Skill** (`SKILL.md` plus optional scripts/resources)
 3. Pass it as **context** in the conversation
 
 Each choice has trade-offs. This post gives you a decision framework.
@@ -59,7 +59,7 @@ Ask yourself these three questions in order:
 | "VIP customer rules" | No | Yes (support, billing, feature access) | Skill |
 | "Product categories" | No | Yes (support, sales, reporting) | Skill |
 
-**Decision**: Single-use, single-agent knowledge → **Prompt**. Multi-agent or organizational → next question.
+**Decision**: Single-use, single-agent knowledge → **Prompt**. Multi-agent or organizational → next question. If the governance answer changes the destination in Question 3, promote it to a Skill.
 
 ### Question 3: Does This Knowledge Need Governance, Versioning, or Discovery?
 
@@ -131,9 +131,10 @@ Let me trace through our support agent example:
 2. Used by multiple agents? Maybe (only support agent handles Acme)
 3. Needs governance? Maybe (not really—it's just an implementation detail)
 
-→ **Use PROMPT** or **CONTEXT** (depends on whether other systems care about this assignment)
+→ **Use PROMPT**, **CONTEXT**, or a lookup tool (depends on whether this is static guidance or current account data)
    - If it's truly just support: PROMPT
-   - If billing needs to know who Acme's rep is: CONTEXT or SKILL
+   - If it changes often or lives in a CRM: CONTEXT or tool result
+   - If multiple Claude workflows need the assignment policy, not just the latest account owner: SKILL
 
 ## Real-World Anti-Patterns
 
@@ -147,7 +148,7 @@ SLA details: [250 lines]
 Customer tiers: [300 lines]..."
 ```
 
-**Problem**: Your system prompt becomes unmaintainable. Updates require redeploying agents. No governance. No versioning.
+**Problem**: Your system prompt becomes unmaintainable. Updates require redeploying agents. No governance. No versioning. Claude also loses the progressive disclosure benefit Skills provide: only Skill metadata is loaded up front, and the full `SKILL.md` is read only when relevant.
 
 **When this happens**: You're likely a solo developer or early-stage team who hasn't felt the pain yet. That's fine. As you scale, refactor into skills.
 
@@ -160,7 +161,7 @@ Skill: "Common Greetings"
 Skill: "Response Time Optimization"
 ```
 
-**Problem**: You've turned your prompt into 20 micro-skills. Discovery becomes a maze. Composition overhead doesn't justify the benefit.
+**Problem**: You've turned your prompt into 20 micro-skills. Discovery becomes a maze. Overly broad or overlapping Skill descriptions can also trigger the wrong Skill and degrade other Skills.
 
 **When this happens**: You're over-abstracting. Skills aren't free—they have organizational cost. Use them for knowledge that genuinely needs governance and reuse.
 
@@ -191,7 +192,7 @@ Skill: "Customer Routing"
 
 **Problem**: The governance-critical policies are buried in prose. New team members don't know the rules exist. Updates get missed.
 
-**Repair**: Separate **policy** (explicit, reviewable) from **implementation** (how the policy is executed):
+**Repair**: Separate **policy** (explicit, reviewable) from **implementation** (how the policy is executed), and make `SKILL.md` a concise guide to the right reference files:
 
 ```
 Skill: "Premium Support Policy"
@@ -221,7 +222,7 @@ System Prompt:
   "You are a thoughtful support router. You gather context,
    consult policies, and route fairly."
 
-Skills (Organizational Knowledge):
+Skills (Claude capabilities):
   ├─ Security Incident Routing Policy (governance: CTO)
   ├─ Customer Tier and SLA Policy (governance: CFO)
   ├─ Product Category Knowledge (governance: Product)
@@ -238,6 +239,8 @@ Tools (Actions):
   ├─ Create ticket
   └─ Notify customer
 ```
+
+In the Claude API, Skills do not replace tools. Skills are made available through `container.skills`, while operational actions still require tools, APIs, connectors, or MCP servers.
 
 ## Decision Checklist
 
