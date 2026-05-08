@@ -4,7 +4,7 @@
 
 ## The Problem with Pure Prompts
 
-When Claude introduced multi-step reasoning and agentic capabilities, teams faced a design challenge: **how do you give an agent domain knowledge without bloating its system prompt?**
+When Anthropic introduced Agent Skills for Claude, it addressed a practical design challenge: **how do you give Claude procedural knowledge, scripts, and resources without bloating the system prompt?**
 
 Traditional approaches looked like this:
 
@@ -29,27 +29,32 @@ This approach creates several problems:
 
 ## What Are Skills?
 
-A **skill** is a reusable, discoverable, domain-specific knowledge package that an agent can compose into its reasoning without bloating its direct prompt.
+A **Skill** is Anthropic's folder-based package for teaching Claude how to perform a specific task. A Skill contains a required `SKILL.md` file and can also include scripts, reference files, templates, and other resources that Claude loads only when relevant.
 
 Think of it this way:
 
 - **Prompt**: "Here's what you are. Here's how you think."
 - **Context**: "Here's relevant information for this specific task."
-- **Skill**: "Here's a domain capability that multiple agents might need. Discover it, understand what it does, and use it when appropriate."
+- **Skill**: "Here's a reusable capability folder Claude can discover and load when this task needs it."
 
 ### Anatomy of a Skill
 
-A skill typically includes:
+A Claude Skill typically includes:
 
-1. **Purpose statement**: Clear description of what the skill enables
-2. **Scope**: What this skill covers (and doesn't)
-3. **Invocation triggers**: When an agent should use this skill
-4. **Usage patterns**: How to apply the skill's knowledge
-5. **Constraints**: Limitations or policies embedded in the skill
-6. **Examples**: Real scenarios demonstrating the skill
+1. **A directory**: The Skill is a folder, not just a prompt snippet.
+2. **`SKILL.md`**: The top-level file Claude reads when the Skill is relevant.
+3. **YAML frontmatter**: Required `name` and `description` fields. Claude uses this metadata to decide when to load the Skill.
+4. **Instructions**: The core procedure, constraints, and usage guidance.
+5. **Optional resources**: Additional markdown files, templates, scripts, images, or examples.
+6. **Optional executable code**: Scripts Claude can run through its available execution environment when deterministic code is better than token generation.
 
 ```markdown
-# Skill: Insurance Claims Fraud Detection
+---
+name: detecting-claims-fraud
+description: Identifies fraud indicators in insurance claims and recommends investigation escalation. Use when reviewing a claim for fraud risk, suspicious documentation, staged accidents, inflated amounts, or customer claim history.
+---
+
+# Detecting Claims Fraud
 
 ## Purpose
 Enable agents to identify high-risk fraudulent claims patterns and recommend investigation escalation.
@@ -80,7 +85,13 @@ Use this skill when:
 
 ## Examples
 [Real scenarios with risk scoring...]
+
+## References
+- See `risk-scoring.md` for the full scoring rubric.
+- See `examples.md` for validated examples.
 ```
+
+In Claude's implementation, only the `name` and `description` metadata are loaded up front. If Claude decides the Skill is relevant, it reads `SKILL.md`; if it needs deeper detail, it can then read the referenced files or run bundled scripts. This is Anthropic's progressive disclosure pattern.
 
 ## Why Skills, Not Just Contexts?
 
@@ -88,54 +99,58 @@ You might ask: "Why not just provide this as context in the chat?" Good question
 
 | Dimension | Context | Skill |
 |-----------|---------|-------|
-| **Discovery** | Agent doesn't know it exists | Agent can search and discover relevant skills |
+| **Discovery** | Agent doesn't know it exists | Claude sees Skill metadata and can load the matching Skill |
 | **Reusability** | Single use per conversation | Composed into multiple agents over time |
-| **Versioning** | No version control | Skills can be versioned and evolved |
-| **Governance** | No audit trail | Who created/approved each skill is tracked |
-| **Composition** | Manual (you assemble) | Intentional (agent or system decides) |
+| **Versioning** | No version control | Claude API Skills can be pinned to versions; local Skills can be versioned in Git |
+| **Governance** | No audit trail | Review and deployment can be governed like software artifacts |
+| **Composition** | Manual (you assemble) | Claude can use multiple relevant Skills in the same task |
 | **Scale** | Doesn't scale to 100+ agents | Scales to organizational level |
 
 ## The Skill Lifecycle
 
-Skills follow a lifecycle in agentic systems:
+Claude Skills follow a lifecycle:
 
 ### 1. **Definition**
-Domain experts or teams define skills based on their operational knowledge. This is explicit, documented, and reviewed.
+Domain experts or teams define Skills as folders based on operational knowledge. This is explicit, documented, and reviewed.
 
 ```
-Skill: "Refund Authorization Policy"
-Author: payments-team
-Approval: CFO, Legal
-Version: 2.3 (updated May 2026)
+refund-authorization/
+├─ SKILL.md
+├─ refund-thresholds.md
+├─ examples.md
+└─ scripts/
+   └─ validate_refund.py
 ```
 
 ### 2. **Registration**
-Skills are registered in a discoverable registry so agents and humans can find them.
+Skills are made available to Claude. In Claude Code this can be a local Skill directory or plugin. In the API, Skills are supplied in the `container.skills` list, either as Anthropic-managed Skills or custom Skills uploaded to the workspace.
 
 ### 3. **Composition**
-When building agents, teams explicitly choose which skills to include. An insurance claims agent might compose:
+Claude can use multiple Skills for one task when they are available and relevant. An insurance claims workflow might make these Skills available:
 - Fraud Detection skill
 - Claims Processing Rules skill
 - Customer Service Guidelines skill
 - Policy Coverage skill
 
 ### 4. **Execution**
-During agent reasoning, the skill knowledge is available for the agent's decision-making.
+During work, Claude sees each Skill's metadata, loads `SKILL.md` when relevant, reads additional files as needed, and may run bundled scripts when the environment supports code execution.
 
 ### 5. **Evolution**
-Skills are updated when domain knowledge changes, and version management ensures compatibility.
+Skills are updated when domain knowledge changes. In the API, custom Skill versions are managed separately and production requests should pin versions when stability matters. For local Claude Code use, Git versioning and plugin releases provide the change history.
 
 ```
+
+One operational detail matters: in the Claude API, Skills run through the code execution environment. They are powerful, but they are not a substitute for external APIs, connectors, or MCP servers when the task needs live system access.
 Skill: "Claims Processing Rules"
 - v1.0 (Jan 2026): Initial
 - v2.0 (Mar 2026): Added expedited claims category
 - v2.1 (May 2026): Updated documentation
-  (Current agents auto-update or pin to v2.0)
+  (Production API callers pin to v2.0 or intentionally move to latest)
 ```
 
 ## Skills as Governance Mechanisms
 
-This is where skills become powerful in enterprise settings. They're not just knowledge organization—they're policy enforcement mechanisms.
+This is where Skills become powerful in enterprise settings. They are not automatic policy enforcement by themselves; they are governed instructions and resources that Claude can use consistently when the Skill is triggered.
 
 When your skill includes this:
 
@@ -146,7 +161,7 @@ Automatically mask PII in any generated output.
 Log all data access for audit purposes.
 ```
 
-You're embedding governance directly into the capability. Every agent using this skill automatically enforces the policy.
+You're embedding governance guidance directly into the capability. For this to become reliable enforcement, you still need correct Skill triggering, compatible prompts, tests, tool permissions, and deployment controls.
 
 ## Skills vs Agents vs Prompts: The Hierarchy
 
@@ -171,7 +186,7 @@ Example: "You are a thoughtful claims processor. You gather evidence before deci
 
 ### Skill
 Answers: "What do you know about this domain?"
-Example: "Here are the fraud detection patterns we've learned. Here's the policy for refunds."
+Example: "`detecting-claims-fraud/SKILL.md` contains the fraud workflow; `risk-scoring.md` contains the detailed rubric; `validate_claim.py` can check structured claim data."
 
 ### Context
 Answers: "What's relevant right now?"
@@ -186,23 +201,23 @@ Example: "Compose the insurance prompt with fraud, refund, and privacy skills. I
 Skills are fundamentally about separation of concerns in agentic systems.
 
 - **Reasoning logic** stays in the prompt (how the agent thinks)
-- **Domain knowledge** goes into skills (what the agent knows)
+- **Procedural knowledge and reusable resources** go into Skills (what Claude should load or run for this task)
 - **Task specifics** stay in context (what the agent is doing right now)
 - **Tool definitions** stay separate (what the agent can do)
 
 This separation has profound benefits:
 
-1. **Understandability**: A new team member can read the skill to understand policy, not dig through a 5,000-word prompt.
-2. **Testability**: You can validate that a skill is complete and correct before it's ever used by an agent.
-3. **Auditability**: When an agent makes a bad decision, you can trace it to specific skill knowledge.
-4. **Governance**: You control what knowledge exists and who can use it.
-5. **Evolution**: You can update skills without rewriting 10 agent prompts.
+1. **Understandability**: A new team member can read `SKILL.md` and linked references to understand the workflow, not dig through a 5,000-word prompt.
+2. **Testability**: You can validate whether the Skill triggers correctly and whether Claude follows it on representative tasks.
+3. **Auditability**: When Claude makes a bad decision, you can inspect which Skill files or scripts shaped the behavior.
+4. **Governance**: You control which Skills are installed, uploaded, reviewed, or made available to production calls.
+5. **Evolution**: You can update Skills without rewriting 10 agent prompts, while pinning versions where stability matters.
 
 ## The Real Win: Knowledge as First-Class
 
 In traditional software, we treat code as first-class. Version control, testing, deployment—all for code.
 
-Skills treat domain knowledge the same way. Your fraud detection patterns, your refund policies, your customer service guidelines—these become:
+Skills let you treat procedural knowledge and task resources the same way. Your fraud detection workflow, refund review checklist, document template, spreadsheet script, and brand guidelines become:
 
 - **Version controlled**: Changes are tracked
 - **Reviewable**: Policies are approved before use
@@ -215,10 +230,10 @@ Skills treat domain knowledge the same way. Your fraud detection patterns, your 
 
 Skills aren't a universal solution. They work best when:
 
-✅ You have **reusable domain knowledge** across multiple agents
+✅ You have **reusable procedural knowledge or resources** across multiple Claude workflows
 ✅ You need **governance and audit trails** around that knowledge
 ✅ You want **discoverability** so teams know what policies exist
-✅ You're building at **organizational scale** (10+ agents)
+✅ You're building at **organizational scale** with many Claude users, workflows, or agents
 ✅ Your knowledge **evolves frequently** and needs versioning
 
 ❌ You probably don't need skills if:
@@ -226,6 +241,7 @@ Skills aren't a universal solution. They work best when:
 - Your domain knowledge fits in a 2-3 page prompt
 - You don't need governance or audit trails
 - You're experimenting and prototyping
+- You need real-time external data access; Skills are not a replacement for tools, connectors, or MCP servers
 
 ## Looking Forward
 
